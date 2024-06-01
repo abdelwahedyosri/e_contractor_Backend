@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("job-application")
+@RequestMapping("private/job-application")
 @RequiredArgsConstructor
-public class JobApplicationApiController {
+public class JobApplicationPrivateApiController {
     private final JobApplicationService jobApplicationService;
 }
