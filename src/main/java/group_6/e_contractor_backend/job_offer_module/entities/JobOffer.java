@@ -1,5 +1,6 @@
 package group_6.e_contractor_backend.job_offer_module.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import group_6.e_contractor_backend.job_offer_module.enumerations.*;
@@ -29,6 +30,8 @@ public class JobOffer {
     @Enumerated(EnumType.STRING)
     private JobWorkplaceType workspaceType;
 
+    private String workplaceLocation;
+
     @Enumerated(EnumType.STRING)
     private JobEmploymentRegime employmentRegime;
     private String jobTitle;
@@ -41,12 +44,16 @@ public class JobOffer {
     @OneToMany(mappedBy = "jobOffer")
     private Set<JobApplication> jobApplications;
 
+    private String keyWords;
+    private String consultations;
+
     private Long createdBy;
     @Temporal(TemporalType.DATE)
     private Date creationDate;
     private Long updatedBy;
     @Temporal(TemporalType.DATE)
     private Date updateDate;
+    private Boolean isDeleted;
     private Long deletedBy;
     @Temporal(TemporalType.DATE)
     private Date deleteDate;

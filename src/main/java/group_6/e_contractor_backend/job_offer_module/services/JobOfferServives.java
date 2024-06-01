@@ -20,8 +20,22 @@ public class JobOfferServives implements JobOfferService {
     @Override
     public JobOfferRequirement createJobOfferRequirement(JobOfferRequirement jobOfferRequirement, Long offerId) {
         JobOffer jobOffer = jobOfferRepository.findById(offerId).orElse(null);
-        jobOffer.getRequirements().add(jobOfferRequirement);
-        return jobOfferRequirementRepository.save(jobOfferRequirement);
+        if(jobOffer!=null) {
+            jobOffer.getRequirements().add(jobOfferRequirement);
+            return jobOfferRequirementRepository.save(jobOfferRequirement);
+        }else{
+            return null;
+        }
+    }
+
+    @Override
+    public List<JobOffer> listJobOffers() {
+        return null;
+    }
+
+    @Override
+    public List<JobOffer> listAllJobOffers() {
+        return null;
     }
 
     @Override
@@ -32,6 +46,11 @@ public class JobOfferServives implements JobOfferService {
     @Override
     public List<JobOffer> listJobOffersByType(JobOfferType type) {
         return jobOfferRepository.getJobOffersByType(type);
+    }
+
+    @Override
+    public List<JobOffer> listJobOffersNotDeleted(Boolean isDeleted) {
+        return jobOfferRepository.getJobOffersByIsDeleted(isDeleted);
     }
 
     @Override

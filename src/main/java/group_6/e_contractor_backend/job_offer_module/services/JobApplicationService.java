@@ -11,5 +11,10 @@ public interface JobApplicationService {
     JobApplication updateJobApplication(JobApplication jobApplication);
     JobApplication deleteJobApplication(Long offerId);
     JobApplicationAppointment createJobApplicationAppointment(JobApplicationAppointment jobApplicationAppointment, Long offerId);
+    List<JobApplicationAppointment> listJobApplicationAppointment();
+    List<JobApplicationAppointment> listJobApplicationAppointmentByStatus();
+    List<JobApplicationAppointment> listJobApplicationAppointmentByType();
     JobApplicationFile createJobApplicationFile(JobApplicationFile jobApplicationFile, Long offerId);
+    List<JobApplicationFile> listJobApplicationFile();
+    List<JobApplicationFile> listAllJobApplicationFile();
 }

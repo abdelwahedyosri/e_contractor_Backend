@@ -15,7 +15,6 @@ public class JobOfferApiController {
 
     @PostMapping("create")
     public JobOffer createJobOffer(@RequestBody JobOffer jobOffer){
-
         return  jobOfferService.createJobOffer(jobOffer);
     }
 }

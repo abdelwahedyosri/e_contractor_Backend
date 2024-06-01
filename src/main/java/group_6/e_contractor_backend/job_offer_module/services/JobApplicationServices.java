@@ -40,7 +40,32 @@ public class JobApplicationServices implements JobApplicationService{
     }
 
     @Override
+    public List<JobApplicationAppointment> listJobApplicationAppointment() {
+        return null;
+    }
+
+    @Override
+    public List<JobApplicationAppointment> listJobApplicationAppointmentByStatus() {
+        return null;
+    }
+
+    @Override
+    public List<JobApplicationAppointment> listJobApplicationAppointmentByType() {
+        return null;
+    }
+
+    @Override
     public JobApplicationFile createJobApplicationFile(JobApplicationFile jobApplicationFile, Long offerId) {
+        return null;
+    }
+
+    @Override
+    public List<JobApplicationFile> listJobApplicationFile() {
+        return null;
+    }
+
+    @Override
+    public List<JobApplicationFile> listAllJobApplicationFile() {
         return null;
     }
 }
