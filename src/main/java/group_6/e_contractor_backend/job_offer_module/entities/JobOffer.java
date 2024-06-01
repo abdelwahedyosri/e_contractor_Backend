@@ -4,10 +4,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import group_6.e_contractor_backend.job_offer_module.enumerations.*;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.Set;
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class JobOffer {
     private static final long serialVersionUID = 1L;
     @Id

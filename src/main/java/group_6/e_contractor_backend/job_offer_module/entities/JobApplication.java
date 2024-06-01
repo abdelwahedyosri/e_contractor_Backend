@@ -3,11 +3,19 @@ package group_6.e_contractor_backend.job_offer_module.entities;
 import group_6.e_contractor_backend.job_offer_module.enumerations.JobApplicationStatus;
 import group_6.e_contractor_backend.job_offer_module.enumerations.JobOfferRequirementType;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class JobApplication {
     private static final long serialVersionUID = 1L;
     @Id
