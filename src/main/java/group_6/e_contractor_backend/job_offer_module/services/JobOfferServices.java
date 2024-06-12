@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class JobOfferServices implements JobOfferService {
@@ -44,6 +47,83 @@ public class JobOfferServices implements JobOfferService {
         return savedJobOffer;
     }
 
+    @Override
+    public JobOffer updateJobOffer(JobOffer jobOffer) {
+        Optional<JobOffer> existingJobOfferOptional = jobOfferRepository.findById(jobOffer.getOfferId());
+        if (!existingJobOfferOptional.isPresent()) {
+            return null;
+        }
+
+        JobOffer existingJobOffer = existingJobOfferOptional.get();
+
+        existingJobOffer.setJobTitle(jobOffer.getJobTitle());
+        existingJobOffer.setDescription(jobOffer.getDescription());
+        existingJobOffer.setTasksDescription(jobOffer.getTasksDescription());
+        existingJobOffer.setType(jobOffer.getType());
+        existingJobOffer.setWorkspaceType(jobOffer.getWorkspaceType());
+        existingJobOffer.setJobContract(jobOffer.getJobContract());
+        existingJobOffer.setStatus(jobOffer.getStatus());
+        existingJobOffer.setCountry(jobOffer.getCountry());
+        existingJobOffer.setCity(jobOffer.getCity());
+        existingJobOffer.setLocation(jobOffer.getLocation());
+        existingJobOffer.setRenumeration(jobOffer.getRenumeration());
+        existingJobOffer.setRenumerationPeriod(jobOffer.getRenumerationPeriod());
+        existingJobOffer.setRenumerationCurrency(jobOffer.getRenumerationCurrency());
+        existingJobOffer.setCategory(jobOffer.getCategory());
+        existingJobOffer.setOpenPositions(jobOffer.getOpenPositions());
+        existingJobOffer.setDeadline(jobOffer.getDeadline());
+        existingJobOffer.setEducationLevel(jobOffer.getEducationLevel());
+        existingJobOffer.setExperience(jobOffer.getExperience());
+        existingJobOffer.setSkills(jobOffer.getSkills());
+        existingJobOffer.setLanguage(jobOffer.getLanguage());
+        existingJobOffer.setAllowSimpleApplications(jobOffer.getAllowSimpleApplications());
+
+        existingJobOffer.setUpdatedBy(1L);
+        existingJobOffer.setUpdateDate(LocalDate.now());
+
+        if (JobOfferStatus.Published.equals(jobOffer.getStatus()) && existingJobOffer.getPublishingDate() == null) {
+            existingJobOffer.setPublishingDate(LocalDate.now());
+        }
+
+        // Save the updated job offer
+        JobOffer updatedJobOffer = jobOfferRepository.save(existingJobOffer);
+
+        // Update or create skills
+        if (jobOffer.getSkills() != null && !jobOffer.getSkills().isEmpty()) {
+            List<String> skillsList = Arrays.asList(jobOffer.getSkills().split(","));
+            for (String skill : skillsList) {
+                jobOfferSkillService.createJobOfferSkill(skill);
+            }
+        }
+
+        if (jobOffer.getRequirements() != null && !jobOffer.getRequirements().isEmpty()) {
+
+            List<JobOfferRequirement> currentRequirements = jobOfferRequirementRepository.getJobOfferRequirementsByJobOfferOfferId(existingJobOffer.getOfferId());
+
+           List<String> incomingRequirementLabels = jobOffer.getRequirements().stream()
+                    .map(JobOfferRequirement::getLabel)
+                    .collect(Collectors.toList());
+
+            for (JobOfferRequirement currentRequirement : currentRequirements) {
+                if (!incomingRequirementLabels.contains(currentRequirement.getLabel())) {
+                    jobOfferRequirementRepository.delete(currentRequirement);
+                }
+            }
+
+            for (JobOfferRequirement requirement : jobOffer.getRequirements()) {
+                Optional<JobOfferRequirement> existingRequirement = jobOfferRequirementRepository.getJobOfferRequirementByLabelAndJobOfferOfferId(requirement.getLabel(), existingJobOffer.getOfferId());
+                if (existingRequirement.isPresent()) {
+                    JobOfferRequirement requirement1 = existingRequirement.get();
+                    requirement1.setValue(requirement.getValue());
+                }
+                requirement.setJobOffer(existingJobOffer);
+                jobOfferRequirementRepository.save(requirement);
+            }
+        }
+
+        return updatedJobOffer;
+    }
+
 
     @Override
     public JobOffer getJobOfferByReference(String reference) {
@@ -77,7 +157,7 @@ public class JobOfferServices implements JobOfferService {
 
     @Override
     public List<JobOffer> listJobOffersByStatus(JobOfferStatus status) {
-        return jobOfferRepository.getJobOffersByStatus(status);
+        return jobOfferRepository.getJobOffersByStatusOrderByUpdateDateDesc(status);
     }
 
     @Override
@@ -88,11 +168,6 @@ public class JobOfferServices implements JobOfferService {
     @Override
     public List<JobOffer> listJobOffersNotDeleted(Boolean isDeleted) {
         return jobOfferRepository.getJobOffersByIsDeleted(isDeleted);
-    }
-
-    @Override
-    public JobOffer updateJobOffer(JobOffer jobOffer) {
-        return null;
     }
 
     @Override

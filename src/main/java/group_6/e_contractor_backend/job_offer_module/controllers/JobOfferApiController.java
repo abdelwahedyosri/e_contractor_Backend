@@ -1,6 +1,7 @@
 package group_6.e_contractor_backend.job_offer_module.controllers;
 
 import group_6.e_contractor_backend.job_offer_module.entities.*;
+import group_6.e_contractor_backend.job_offer_module.enumerations.JobOfferStatus;
 import group_6.e_contractor_backend.job_offer_module.repositories.*;
 import group_6.e_contractor_backend.job_offer_module.services.*;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +30,21 @@ public class JobOfferApiController {
     public JobOffer getJobOfferByReference(@PathVariable String reference) {
         return jobOfferService.getJobOfferByReference(reference);
     }
+
+    @PostMapping("update")
+    public JobOffer updateJobOffer(@RequestBody JobOffer jobOffer){
+        return  jobOfferService.updateJobOffer(jobOffer);
+    }
+
+    @GetMapping("drafts")
+    public Map<String, Object> listDrafts() {
+        Map<String, Object> response = new HashMap<>();
+        List<JobOffer> drafts = jobOfferService.listJobOffersByStatus(JobOfferStatus.Draft);
+        response.put("drafts", drafts);
+        return response;
+    }
     @GetMapping("skills/{status}")
-    public Map<String, Object> listJobOffer(@PathVariable String status) {
+    public Map<String, Object> listSavedSkills(@PathVariable String status) {
         Map<String, Object> response = new HashMap<>();
         List<JobOfferSkill> skills = jobOfferSkillService.listJobOfferSkillsByStatus(status);
         response.put("skills", skills);
