@@ -1,8 +1,5 @@
 package group_6.e_contractor_backend.job_offer_module.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import group_6.e_contractor_backend.job_offer_module.enumerations.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 @Entity
@@ -22,21 +20,42 @@ public class JobOffer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long offerId;
+    private String reference;
+    private String jobTitle;
+    private String description;
+    private String tasksDescription;
+
     @Enumerated(EnumType.STRING)
     private JobOfferType type;
 
     @Enumerated(EnumType.STRING)
-    private JobOfferStatus status;
-    @Enumerated(EnumType.STRING)
     private JobWorkplaceType workspaceType;
 
-    private String workplaceLocation;
+    @Enumerated(EnumType.STRING)
+    private JobContractType jobContract;
 
     @Enumerated(EnumType.STRING)
-    private JobEmploymentRegime employmentRegime;
-    private String jobTitle;
-    private String description;
+    private JobOfferStatus status;
+
+    private String country;
+    private String city;
+    private String location;
+
+    private Long renumeration;
+    private String renumerationPeriod;
+    private String renumerationCurrency;
+    private String category;
+    private Long openPositions;
+
+    private LocalDate deadline;
+    private LocalDate publishingDate;
+
+    private String educationLevel;
+    private String experience;
+    private String skills;
+    private String language;
     private Boolean allowSimpleApplications;
+
 
     @OneToMany(mappedBy = "jobOffer")
     private Set<JobOfferRequirement> requirements;
@@ -44,17 +63,12 @@ public class JobOffer {
     @OneToMany(mappedBy = "jobOffer")
     private Set<JobApplication> jobApplications;
 
-    private String keyWords;
     private String consultations;
-
     private Long createdBy;
-    @Temporal(TemporalType.DATE)
-    private Date creationDate;
+    private LocalDate creationDate;
     private Long updatedBy;
-    @Temporal(TemporalType.DATE)
-    private Date updateDate;
+    private LocalDate updateDate;
     private Boolean isDeleted;
     private Long deletedBy;
-    @Temporal(TemporalType.DATE)
-    private Date deleteDate;
+    private LocalDate deleteDate;
 }

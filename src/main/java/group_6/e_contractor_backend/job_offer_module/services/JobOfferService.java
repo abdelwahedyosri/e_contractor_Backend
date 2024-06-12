@@ -7,14 +7,17 @@ import java.util.List;
 
 public interface JobOfferService {
     JobOffer createJobOffer(JobOffer jobOffer);
-    JobOfferRequirement createJobOfferRequirement(JobOfferRequirement jobOfferRequirement, Long offerId);
+    JobOffer updateJobOffer(JobOffer jobOffer);
+    JobOffer getJobOfferByReference(String reference);
+    JobOffer getJobOfferById(Long id);
     List<JobOffer> listJobOffers();
     List<JobOffer> listAllJobOffers();
     List<JobOffer> listJobOffersByStatus(JobOfferStatus status);
     List<JobOffer> listJobOffersByType(JobOfferType type);
     List<JobOffer> listJobOffersNotDeleted(Boolean isDeleted);
-    JobOffer updateJobOffer(JobOffer jobOffer);
     JobOffer publishJobOffer(Long offerId);
     JobOffer archiveJobOffer(Long offerId);
     JobOffer deleteJobOffer(Long offerId);
+    JobOfferRequirement createJobOfferRequirement(JobOfferRequirement jobOfferRequirement, Long offerId);
+
 }

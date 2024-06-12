@@ -5,18 +5,55 @@ import group_6.e_contractor_backend.job_offer_module.repositories.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 @Service
 @RequiredArgsConstructor
-public class JobOfferServives implements JobOfferService {
+public class JobOfferServices implements JobOfferService {
 
     private final JobOfferRepository jobOfferRepository;
     private final JobOfferRequirementRepository jobOfferRequirementRepository;
+    private final JobOfferSkillService jobOfferSkillService;
     @Override
     public JobOffer createJobOffer(JobOffer jobOffer) {
-        return jobOfferRepository.save(jobOffer);
+        LocalDate currentDate = LocalDate.now();
+
+        jobOffer.setCreatedBy(1L);
+        jobOffer.setCreationDate(currentDate);
+        jobOffer.setUpdatedBy(1L);
+        jobOffer.setUpdateDate(currentDate);
+
+        if (JobOfferStatus.Published.equals(jobOffer.getStatus())) {
+            jobOffer.setPublishingDate(currentDate);
+        }
+
+        JobOffer savedJobOffer = jobOfferRepository.save(jobOffer);
+        if (jobOffer.getSkills() != null && !jobOffer.getSkills().isEmpty()) {
+            List<String> skillsList = Arrays.asList(jobOffer.getSkills().split(","));
+            for (String skill : skillsList) {
+                jobOfferSkillService.createJobOfferSkill(skill);
+            }
+        }
+        if (jobOffer.getRequirements() != null && !jobOffer.getRequirements().isEmpty()) {
+            for (JobOfferRequirement requirement : jobOffer.getRequirements()) {
+                requirement.setJobOffer(jobOffer);
+                jobOfferRequirementRepository.save(requirement);
+            }
+        }
+        return savedJobOffer;
     }
 
+
+    @Override
+    public JobOffer getJobOfferByReference(String reference) {
+        return jobOfferRepository.getJobOfferByReference(reference);
+    }
+
+    @Override
+    public JobOffer getJobOfferById(Long id) {
+        return null;
+    }
     @Override
     public JobOfferRequirement createJobOfferRequirement(JobOfferRequirement jobOfferRequirement, Long offerId) {
         JobOffer jobOffer = jobOfferRepository.findById(offerId).orElse(null);

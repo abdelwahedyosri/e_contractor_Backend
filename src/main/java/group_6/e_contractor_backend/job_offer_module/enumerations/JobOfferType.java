@@ -1,7 +1,10 @@
 package group_6.e_contractor_backend.job_offer_module.enumerations;
 
 public enum JobOfferType {
-    Job,
+    Freelance,
+    FullTime,
+    Internship,
     PreHireInternship,
-    Internship
+    PartTime,
+    Temporary
 }

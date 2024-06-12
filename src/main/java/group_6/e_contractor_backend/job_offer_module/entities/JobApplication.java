@@ -21,9 +21,10 @@ public class JobApplication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long applicationId;
+    private String reference;
 
     @ManyToOne
-    @JoinColumn(name = "offerid")
+    @JoinColumn(name = "offerId")
     private JobOffer jobOffer;
 
     @OneToMany(mappedBy = "jobApplication")
