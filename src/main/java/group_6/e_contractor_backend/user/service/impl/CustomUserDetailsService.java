@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.Optional;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -19,10 +20,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+        Optional<UserEntity> user = userRepository.findByUsername(username);
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                Collections.singleton(new SimpleGrantedAuthority(user.getRole().getRole())));
+        return new org.springframework.security.core.userdetails.User(user.get().getUsername(), user.get().getPassword(),
+                Collections.singleton(new SimpleGrantedAuthority(user.get().getRole().getRole())));
     }
 }

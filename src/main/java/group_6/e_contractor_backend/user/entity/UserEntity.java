@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -44,6 +45,15 @@ public class UserEntity implements UserDetails {
 
     @Column(nullable = false, unique = true)
     private String username;
+
+    @Column
+    private String gender;
+
+    @Column
+    private String dob;
+
+    @Column
+    private String location;
 
     @Column(nullable = false)
     private String password;
@@ -103,4 +113,9 @@ public class UserEntity implements UserDetails {
     public boolean isEnabled() {
         return isActive;
     }
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SocialAccountEntity> socialAccounts;
+
+
 }

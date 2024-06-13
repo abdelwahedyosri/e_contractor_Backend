@@ -14,32 +14,28 @@ import org.springframework.security.authentication.InternalAuthenticationService
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.web.bind.annotation.*;
 
-
+import jakarta.servlet.http.HttpServletRequest; // Use jakarta.servlet package
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class AuthenticationController {
-
-    private static final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private JwtUtil jwtUtil;
-
-    @Autowired
     private CustomUserDetailsService userDetailsService;
 
-    @PostMapping(value = "/authenticate", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<?> createAuthenticationToken( @RequestBody JwtRequest jwtRequest) {
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @PostMapping("/login")
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest jwtRequest) throws Exception {
         try {
-            logger.info("Attempting to authenticate user: {}", jwtRequest.getUsername());
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(jwtRequest.getUsername(), jwtRequest.getPassword())
             );
@@ -48,24 +44,32 @@ public class AuthenticationController {
 
             final String jwt = jwtUtil.generateToken(userDetails.getUsername());
 
-            logger.info("Authentication successful for user: {}", jwtRequest.getUsername());
-            logger.info("Generated JWT Token: {}", jwt);
             return ResponseEntity.ok(new JwtResponse(jwt));
         } catch (BadCredentialsException e) {
-            logger.error("Authentication failed for user: {}", jwtRequest.getUsername(), e);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("{\"error\": \"Invalid credentials\", \"details\": \"" + e.getMessage() + "\"}");
         } catch (LockedException e) {
-            logger.error("User account is locked: {}", jwtRequest.getUsername(), e);
             return ResponseEntity.status(HttpStatus.LOCKED).body("{\"error\": \"User account is locked\", \"details\": \"" + e.getMessage() + "\"}");
         } catch (DisabledException e) {
-            logger.error("User account is disabled: {}", jwtRequest.getUsername(), e);
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("{\"error\": \"User account is disabled\", \"details\": \"" + e.getMessage() + "\"}");
         } catch (InternalAuthenticationServiceException e) {
-            logger.error("Internal authentication service exception for user: {}", jwtRequest.getUsername(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\": \"An internal error occurred during authentication\", \"details\": \"" + e.getMessage() + "\"}");
         } catch (Exception e) {
-            logger.error("An error occurred during authentication for user: {}", jwtRequest.getUsername(), e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\": \"An error occurred during authentication\", \"details\": \"" + e.getMessage() + "\"}");
+        }
+    }
+
+    @GetMapping("/oauth2/callback")
+    public ResponseEntity<?> oauth2Callback(OAuth2AuthenticationToken authentication, HttpServletRequest request) {
+        try {
+            OAuth2User oAuth2User = authentication.getPrincipal();
+            String username = oAuth2User.getAttribute("email"); // Assuming the OAuth2 provider returns the email as the username
+            final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
+            final String jwt = jwtUtil.generateToken(userDetails.getUsername());
+
+            return ResponseEntity.ok(new JwtResponse(jwt));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\": \"An error occurred during OAuth2 authentication\", \"details\": \"" + e.getMessage() + "\"}");
         }
     }
 }
