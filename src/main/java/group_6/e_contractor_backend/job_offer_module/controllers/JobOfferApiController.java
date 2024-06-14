@@ -43,6 +43,14 @@ public class JobOfferApiController {
         response.put("drafts", drafts);
         return response;
     }
+
+    @GetMapping("published")
+    public Map<String, Object> listPublished() {
+        Map<String, Object> response = new HashMap<>();
+        List<JobOffer> list = jobOfferService.listJobOffersByStatus(JobOfferStatus.Published);
+        response.put("published", list);
+        return response;
+    }
     @GetMapping("skills/{status}")
     public Map<String, Object> listSavedSkills(@PathVariable String status) {
         Map<String, Object> response = new HashMap<>();
