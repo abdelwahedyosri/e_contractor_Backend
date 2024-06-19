@@ -61,6 +61,15 @@ public class JobOffer {
     private Set<JobOfferRequirement> requirements;
 
     @OneToMany(mappedBy = "jobOffer")
+    private Set<JobOfferConsultation> jobConsultations;
+
+    @OneToMany(mappedBy = "jobOffer")
+    private Set<JobOfferInterest> jobInterests;
+
+    @OneToMany(mappedBy = "jobOffer")
+    private Set<JobOfferSaving> jobSavings;
+
+    @OneToMany(mappedBy = "jobOffer")
     private Set<JobApplication> jobApplications;
 
     private String consultations;
