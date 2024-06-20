@@ -58,11 +58,9 @@ public class UserEntity implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Boolean isActive;
 
-    @Column(nullable = false)
-    private Boolean isApproved;
 
     @Column(nullable = false)
     private LocalDateTime creationDate;
@@ -70,7 +68,7 @@ public class UserEntity implements UserDetails {
     @Column(nullable = false)
     private String createdBy;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Boolean isDeleted;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -117,5 +115,6 @@ public class UserEntity implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SocialAccountEntity> socialAccounts;
 
-
+    @Column
+    private LocalDateTime lastLogin;
 }

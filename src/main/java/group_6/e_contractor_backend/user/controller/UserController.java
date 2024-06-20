@@ -1,12 +1,17 @@
 package group_6.e_contractor_backend.user.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import group_6.e_contractor_backend.user.dto.UserDTO;
 import group_6.e_contractor_backend.user.entity.UserEntity;
+import group_6.e_contractor_backend.user.service.impl.UserService;
 import group_6.e_contractor_backend.user.service.spec.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +20,12 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
-    private final IUserService userService;
+    private final UserService userService;
 
-    @Autowired
-    public UserController(IUserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
+
 
     @PostMapping("/register")
     public ResponseEntity<UserDTO> registerUser(@RequestBody UserDTO userDTO) {
@@ -39,9 +44,19 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDTO>> getAllUsers() {
-        List<UserDTO> users = userService.getAllUsers();
-        return ResponseEntity.ok(users);
+    public ResponseEntity<Map<String, Object>> getAllUsers(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) String sortColumn,
+            @RequestParam(required = false) String sortDirection) {
+
+        Page<UserEntity> usersPage = userService.getUsers(page, size, search, sortColumn, sortDirection);
+        Map<String, Object> response = new HashMap<>();
+        response.put("users", usersPage.getContent());
+        response.put("total", usersPage.getTotalElements());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/{userId}")
@@ -145,6 +160,13 @@ public class UserController {
         boolean exists = userService.existsByUsername(username);
         return ResponseEntity.ok(exists);
     }
+
+    @GetMapping("/exists/email/{email}")
+    public ResponseEntity<Boolean> checkEmailExists(@PathVariable String email) {
+        boolean exists = userService.existsByEmail(email);
+        return ResponseEntity.ok(exists);
+    }
+
     @PostMapping("/forgot-password")
     public ResponseEntity<?> forgotPassword(@RequestBody ForgotPasswordRequest request) {
         userService.sendPasswordResetEmail(request.getEmail());

@@ -14,6 +14,10 @@ import group_6.e_contractor_backend.user.repository.IUserRepository;
 import group_6.e_contractor_backend.user.service.spec.IUserService;
 import group_6.e_contractor_backend.user.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -75,12 +79,23 @@ public class UserService implements IUserService {
             userRepository.save(user);
         });
     }
-
     @Override
-    public List<UserDTO> getAllUsers() {
-        List<UserEntity> users = userRepository.findAll();
-        return userMapper.toDtoList(users);
+    public Page<UserEntity> getUsers(int page, int size, String search, String sortColumn, String sortDirection) {
+        Pageable pageable;
+        if (sortColumn != null && !sortColumn.isEmpty()) {
+            Sort sort = sortDirection.equalsIgnoreCase("desc") ? Sort.by(sortColumn).descending() : Sort.by(sortColumn).ascending();
+            pageable = PageRequest.of(page, size, sort);
+        } else {
+            pageable = PageRequest.of(page, size);
+        }
+
+        if (search != null && !search.isEmpty()) {
+            return userRepository.findBySearchTerm(search, pageable);
+        } else {
+            return userRepository.findAll(pageable);
+        }
     }
+
 
     @Override
     public Optional<UserDTO> getUserById(String userId) {
@@ -252,5 +267,10 @@ public class UserService implements IUserService {
             user.get().setPassword(passwordEncoder.encode(newPassword)); // Encode the password before saving
             //userRepository.save(user);
         }
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return userRepository.findByEmail(email).isPresent();
     }
 }

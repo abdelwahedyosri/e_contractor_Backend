@@ -13,12 +13,15 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.HttpServletRequest; // Use jakarta.servlet package
+
+import java.security.Principal;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -71,5 +74,11 @@ public class AuthenticationController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{\"error\": \"An error occurred during OAuth2 authentication\", \"details\": \"" + e.getMessage() + "\"}");
         }
+    }
+
+    @PostMapping("/update-last-login")
+    public ResponseEntity<?> updateLastLogin(@AuthenticationPrincipal UserDetails userDetails) {
+        userDetailsService.updateLastLogin(userDetails.getUsername());
+        return ResponseEntity.ok().build();
     }
 }

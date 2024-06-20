@@ -1,6 +1,6 @@
 package group_6.e_contractor_backend.user.mapper;
 
-import group_6.e_contractor_backend.user.dto.RoleDTO;
+import group_6.e_contractor_backend.user.dto.RoleCreationDTO;
 import group_6.e_contractor_backend.user.entity.RoleEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -9,8 +9,8 @@ import org.mapstruct.factory.Mappers;
 public interface RoleMapper {
     RoleMapper INSTANCE = Mappers.getMapper(RoleMapper.class);
 
-    RoleDTO toRoleDTO(RoleEntity role);
+    RoleCreationDTO toRoleDTO(RoleEntity role);
 
-    RoleEntity toRole(RoleDTO roleDTO);
+    RoleEntity toRole(RoleCreationDTO roleDTO);
 }
 

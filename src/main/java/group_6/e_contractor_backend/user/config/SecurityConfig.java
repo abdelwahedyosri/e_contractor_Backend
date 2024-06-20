@@ -39,6 +39,7 @@ public class SecurityConfig {
                         .requestMatchers(
                                 new AntPathRequestMatcher("/"),
                                 new AntPathRequestMatcher("/login"),
+                                new AntPathRequestMatcher("/update-last-login"),
                                 new AntPathRequestMatcher("/oauth2/**"),
                                 new AntPathRequestMatcher("/api/public/**"),
                                 new AntPathRequestMatcher("/v3/api-docs/**"),
@@ -49,6 +50,7 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/swagger.json"),
                                 new AntPathRequestMatcher("/users/forgot-password"),
                                 new AntPathRequestMatcher("/users/reset-password")
+
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

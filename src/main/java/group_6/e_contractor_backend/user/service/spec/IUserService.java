@@ -2,6 +2,7 @@ package group_6.e_contractor_backend.user.service.spec;
 
 import group_6.e_contractor_backend.user.dto.UserDTO;
 import group_6.e_contractor_backend.user.entity.UserEntity;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +17,7 @@ public interface IUserService {
 
     void handleSessionExpired(String userId);
 
-    List<UserDTO> getAllUsers();
+    Page<UserEntity> getUsers(int page, int size, String search, String sortColumn, String sortDirection);
 
     Optional<UserDTO> getUserById(String userId);
 
@@ -46,4 +47,5 @@ public interface IUserService {
     boolean validateResetToken(String token,String username);
     void sendPasswordResetEmail(String email);
     void updatePassword(String username, String newPassword);
+    boolean existsByEmail(String email);
 }
