@@ -3,20 +3,68 @@ package group_6.e_contractor_backend.job_offer_module.services;
 import group_6.e_contractor_backend.job_offer_module.entities.*;
 import group_6.e_contractor_backend.job_offer_module.enumerations.*;
 import group_6.e_contractor_backend.job_offer_module.repositories.*;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 @Service
 @RequiredArgsConstructor
 public class JobApplicationServices implements JobApplicationService{
 
-    private final JobApplicationRepository jobOfferRepository;
+    private final JobApplicationRepository jobApplicationRepository;
     private final JobApplicationAppointmentRepository jobApplicationAppointmentRepository;
     private final JobApplicationFileRepository jobApplicationFileRepository;
+    private final JobFileRepository jobFileRepository ;
+    private final JobOfferRepository jobOfferRepository ;
+    private final StudentRepository studentRepository ;
+
+    @Value("${file.upload-dir}")
+    private String UPLOAD_DIR;
+
+    @PostConstruct
+    public void init() {
+        File uploadDirectory = new File(UPLOAD_DIR);
+        if (!uploadDirectory.exists()) {
+            uploadDirectory.mkdirs();
+        }
+    }
+
     @Override
-    public JobApplication createJobApplication(JobApplication jobApplication) {
-        return null;
+    public JobApplication createJobApplication(JobApplication jobApplication,Long offerId,Long studentId) {
+        LocalDate currentDate = LocalDate.now();
+        JobOffer jobOffer = jobOfferRepository.findById(offerId).orElse(null);
+        Student student = studentRepository.findById(studentId).orElse(null);
+        jobApplication.setCreatedBy(1L);
+        jobApplication.setCreationDate(currentDate);
+        jobApplication.setUpdateDate(currentDate);
+        jobApplication.setApplicationStatus(JobApplicationStatus.Sent);
+        jobApplication.setJobOffer(jobOffer);
+        jobApplication.setStudent(student);
+        JobApplication savedApplication = jobApplicationRepository.save(jobApplication);
+
+        if (jobApplication.getJobApplicationFiles() != null && !jobApplication.getJobApplicationFiles().isEmpty()) {
+            for (JobApplicationFile applicationFile : jobApplication.getJobApplicationFiles()) {
+                JobFile jobFile = applicationFile.getJobFile();
+                applicationFile.setJobFile(jobFile);
+                applicationFile.setJobApplication(jobApplication);
+                jobApplicationFileRepository.save(applicationFile);
+            }
+        }
+        return savedApplication;
     }
 
     @Override
@@ -52,6 +100,54 @@ public class JobApplicationServices implements JobApplicationService{
     @Override
     public List<JobApplicationAppointment> listJobApplicationAppointmentByType() {
         return null;
+    }
+
+    @Override
+    public JobFile uploadJobFile(MultipartFile file) {
+        String fileToken = UUID.randomUUID().toString();
+        String originalFileName = file.getOriginalFilename();
+        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf('.') + 1);
+        String filePath = UPLOAD_DIR + File.separator + fileToken + "_" + originalFileName;
+
+
+        try {
+            // Save the file to the disk
+            Files.copy(file.getInputStream(), Paths.get(filePath));
+
+            JobFile jobFile = new JobFile();
+            jobFile.setFileName(fileToken + "_" + file.getOriginalFilename());
+            jobFile.setFileOriginalName(file.getOriginalFilename());
+            jobFile.setFileSize(file.getSize());
+            jobFile.setFileToken(fileToken);
+            jobFile.setFilePathUrl(filePath);
+            jobFile.setFileType(file.getContentType());
+            jobFile.setFileExtension(fileExtension);
+            jobFile.setIsActive(true);
+            jobFile.setCreatedBy(1L);
+            jobFile.setCreationDate(LocalDate.now());
+
+            // Save the JobFile entity to the database
+            return jobFileRepository.save(jobFile);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public Resource downloadJobFile(String fileName) {
+        try {
+            Path filePath = Paths.get(UPLOAD_DIR).resolve(fileName).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
+            if (resource.exists()) {
+                return resource;
+            } else {
+                throw new RuntimeException("File not found " + fileName);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("File not found " + fileName, e);
+        }
     }
 
     @Override

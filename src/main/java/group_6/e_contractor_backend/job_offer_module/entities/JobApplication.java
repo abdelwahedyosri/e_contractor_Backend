@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -23,9 +24,20 @@ public class JobApplication {
     private Long applicationId;
     private String reference;
 
+    private String email;
+    private Long phoneNumber;
+    private String studentAddress;
+    private String studentTitle;
+    private String studentName;
+
     @ManyToOne
     @JoinColumn(name = "offerId")
     private JobOffer jobOffer;
+
+    @ManyToOne
+    @JoinColumn(name = "studentId")
+    private Student student;
+
 
     @OneToMany(mappedBy = "jobApplication")
     private Set<JobApplicationFile> jobApplicationFiles;
@@ -35,17 +47,18 @@ public class JobApplication {
 
     @Enumerated(EnumType.STRING)
     private JobApplicationStatus applicationStatus;
-    private Long createdBy;
-    @Temporal(TemporalType.DATE)
-    private Date creationDate;
+
     private Long declinedBy;
     @Temporal(TemporalType.DATE)
-    private Date declineDate;
+    private LocalDate declineDate;
     @Temporal(TemporalType.DATE)
-    private Date acceptedDate;
+    private LocalDate acceptedDate;
     @Temporal(TemporalType.DATE)
-    private Date approvalDate;
+    private LocalDate approvalDate;
+    private Long createdBy;
     @Temporal(TemporalType.DATE)
-    private Date updateDate;
+    private LocalDate creationDate;
+    @Temporal(TemporalType.DATE)
+    private LocalDate updateDate;
 
 }

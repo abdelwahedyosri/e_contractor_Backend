@@ -9,5 +9,4 @@ import java.util.Optional;
 public interface JobOfferSkillRepository extends JpaRepository<JobOfferSkill, Long>{
     Optional<JobOfferSkill> getJobOfferSkillByLabel(String label);
     List<JobOfferSkill> getJobOfferSkillByIsDeleted(boolean isDeleted);
-
 }

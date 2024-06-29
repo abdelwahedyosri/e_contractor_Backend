@@ -1,5 +1,6 @@
 package group_6.e_contractor_backend.job_offer_module.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import group_6.e_contractor_backend.job_offer_module.enumerations.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,9 @@ public class JobOffer {
     private Long offerId;
     private String reference;
     private String jobTitle;
+    @Column(length = 2000)
     private String description;
+    @Column(length = 2000)
     private String tasksDescription;
 
     @Enumerated(EnumType.STRING)
@@ -52,6 +55,7 @@ public class JobOffer {
 
     private String educationLevel;
     private String experience;
+    @Column(length = 2000)
     private String skills;
     private String language;
     private Boolean allowSimpleApplications;
@@ -71,6 +75,10 @@ public class JobOffer {
 
     @OneToMany(mappedBy = "jobOffer")
     private Set<JobApplication> jobApplications;
+
+    @ManyToOne
+    @JoinColumn(name = "employerId")
+    private Employer employer;
 
     private String consultations;
     private Long createdBy;

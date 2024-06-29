@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
 @Entity
 @Getter
@@ -35,19 +36,19 @@ public class JobApplicationAppointment {
     private String employer_comment;
     private String student_comment;
     @Temporal(TemporalType.DATE)
-    private Date declineDate;
+    private LocalDate declineDate;
     @Temporal(TemporalType.DATE)
-    private Date approvalDate;
+    private LocalDate approvalDate;
     private Long createdBy;
     @Temporal(TemporalType.DATE)
-    private Date creationDate;
+    private LocalDate creationDate;
     private Long updatedBy;
     @Temporal(TemporalType.DATE)
-    private Date updateDate;
+    private LocalDate updateDate;
 
     private Boolean isDeleted;
     private Long deletedBy;
     @Temporal(TemporalType.DATE)
-    private Date deleteDate;
+    private LocalDate deleteDate;
 
 }

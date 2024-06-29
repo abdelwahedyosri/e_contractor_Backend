@@ -22,4 +22,10 @@ public class JobOfferConsultation {
     @ManyToOne
     @JoinColumn(name = "offerId")
     private JobOffer jobOffer;
+
+    @ManyToOne
+    @JoinColumn(name = "studentId")
+    private Student student;
+
+    private Long consultationsNumber;
 }

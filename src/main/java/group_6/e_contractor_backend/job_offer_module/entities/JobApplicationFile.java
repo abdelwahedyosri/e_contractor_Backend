@@ -6,7 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -17,21 +20,25 @@ public class JobApplicationFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long applicationFileId;
-    private Boolean isCv;
-    private String file_name;
-    private String original_file_name;
-    private String file_token;
-    private String file_path_url;
+    private Boolean isResume;
+    private String applicationFileType;
+    private Boolean isStudentFile;
+
     @ManyToOne
     @JoinColumn(name = "applicationId")
     private JobApplication jobApplication;
+
+    @ManyToOne
+    @JoinColumn(name = "fileId")
+    private JobFile jobFile;
+
     private Boolean isActive;
 
     private Long createdBy;
     @Temporal(TemporalType.DATE)
-    private Date creationDate;
+    private LocalDate creationDate;
 
     private Long deletedBy;
     @Temporal(TemporalType.DATE)
-    private Date deleteDate;
+    private LocalDate deleteDate;
 }

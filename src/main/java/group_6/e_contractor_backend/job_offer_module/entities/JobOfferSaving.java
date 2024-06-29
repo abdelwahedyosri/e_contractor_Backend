@@ -21,4 +21,8 @@ public class JobOfferSaving {
     @ManyToOne
     @JoinColumn(name = "offerId")
     private JobOffer jobOffer;
+
+    @ManyToOne
+    @JoinColumn(name = "studentId")
+    private Student student;
 }
