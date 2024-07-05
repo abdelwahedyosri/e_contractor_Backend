@@ -18,10 +18,12 @@ public class JobOfferServices implements JobOfferService {
     private final JobOfferRepository jobOfferRepository;
     private final JobOfferRequirementRepository jobOfferRequirementRepository;
     private final JobOfferSkillService jobOfferSkillService;
+    private final EmployerRepository employerRepository;
     @Override
-    public JobOffer createJobOffer(JobOffer jobOffer) {
+    public JobOffer createJobOffer(JobOffer jobOffer,Long employerId) {
         LocalDate currentDate = LocalDate.now();
-
+        Employer employer = employerRepository.findById(employerId).orElse(null);
+        jobOffer.setEmployer(employer);
         jobOffer.setCreatedBy(1L);
         jobOffer.setCreationDate(currentDate);
         jobOffer.setUpdatedBy(1L);

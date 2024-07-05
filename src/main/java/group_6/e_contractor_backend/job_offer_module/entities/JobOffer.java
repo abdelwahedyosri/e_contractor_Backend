@@ -73,6 +73,7 @@ public class JobOffer {
     @OneToMany(mappedBy = "jobOffer")
     private Set<JobOfferSaving> jobSavings;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "jobOffer")
     private Set<JobApplication> jobApplications;
 

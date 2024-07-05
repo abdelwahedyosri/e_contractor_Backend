@@ -11,6 +11,7 @@ public interface JobApplicationService {
     JobApplication createJobApplication(JobApplication jobApplication,Long offerId,Long studentId);
     List<JobApplication> listJobApplicationsByStatus(JobApplicationStatus status);
     JobApplication updateJobApplication(JobApplication jobApplication);
+    JobApplication getJobApplicationByReference(String reference);
     JobApplication deleteJobApplication(Long offerId);
     JobApplicationAppointment createJobApplicationAppointment(JobApplicationAppointment jobApplicationAppointment, Long offerId);
     List<JobApplicationAppointment> listJobApplicationAppointment();

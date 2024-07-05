@@ -26,11 +26,12 @@ public class JobOfferApiController {
     private final JobOfferSavingRepository jobOfferSavingRepository;
     private final JobOfferConsultationRepository jobOfferConsultationRepository;
     private final StudentRepository studentRepository;
+    private final JobApplicationRepository jobApplicationRepository;
 
 
-    @PostMapping("create")
-    public JobOffer createJobOffer(@RequestBody JobOffer jobOffer){
-        return  jobOfferService.createJobOffer(jobOffer);
+    @PostMapping("create/{employerId}")
+    public JobOffer createJobOffer(@RequestBody JobOffer jobOffer,@PathVariable Long employerId){
+        return  jobOfferService.createJobOffer(jobOffer,employerId);
     }
 
     @GetMapping("reference/{reference}")
@@ -56,6 +57,14 @@ public class JobOfferApiController {
         Map<String, Object> response = new HashMap<>();
         List<JobOffer> list = jobOfferService.listJobOffersByStatus(JobOfferStatus.Published);
         response.put("published", list);
+        return response;
+    }
+
+    @GetMapping("applications/{offerId}")
+    public Map<String, Object> listApplications(@PathVariable Long offerId) {
+        Map<String, Object> response = new HashMap<>();
+        List<JobApplication> list = jobApplicationRepository.getJobApplicationsByJobOfferOfferId(offerId);
+        response.put("applications", list);
         return response;
     }
     @GetMapping("skills/{status}")

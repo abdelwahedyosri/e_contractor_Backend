@@ -31,6 +31,8 @@ public class JobApplicationServices implements JobApplicationService{
     private final JobFileRepository jobFileRepository ;
     private final JobOfferRepository jobOfferRepository ;
     private final StudentRepository studentRepository ;
+    private final JobApplicationRequirementRepository jobApplicationRequirementRepository;
+
 
     @Value("${file.upload-dir}")
     private String UPLOAD_DIR;
@@ -54,16 +56,32 @@ public class JobApplicationServices implements JobApplicationService{
         jobApplication.setApplicationStatus(JobApplicationStatus.Sent);
         jobApplication.setJobOffer(jobOffer);
         jobApplication.setStudent(student);
+        System.out.println("jobApplication");
+        System.out.println(jobApplication);
+        System.out.println("jobApplication.getJobApplicationFiles()");
+        System.out.println(jobApplication.getJobApplicationFiles());
         JobApplication savedApplication = jobApplicationRepository.save(jobApplication);
 
         if (jobApplication.getJobApplicationFiles() != null && !jobApplication.getJobApplicationFiles().isEmpty()) {
             for (JobApplicationFile applicationFile : jobApplication.getJobApplicationFiles()) {
+                System.out.println(applicationFile);
                 JobFile jobFile = applicationFile.getJobFile();
                 applicationFile.setJobFile(jobFile);
                 applicationFile.setJobApplication(jobApplication);
                 jobApplicationFileRepository.save(applicationFile);
             }
         }
+
+        if (jobApplication.getRequirements() != null && !jobApplication.getRequirements().isEmpty()) {
+            for (JobApplicationRequirement requirement : jobApplication.getRequirements()) {
+                System.out.println(requirement);
+                JobOfferRequirement jobRequirement = requirement.getJobOfferRequirement();
+                requirement.setJobOfferRequirement(jobRequirement);
+                requirement.setJobApplication(jobApplication);
+                jobApplicationRequirementRepository.save(requirement);
+            }
+        }
+
         return savedApplication;
     }
 
@@ -75,6 +93,11 @@ public class JobApplicationServices implements JobApplicationService{
     @Override
     public JobApplication updateJobApplication(JobApplication jobApplication) {
         return null;
+    }
+
+    @Override
+    public JobApplication getJobApplicationByReference(String reference) {
+        return jobApplicationRepository.getJobApplicationByReference(reference);
     }
 
     @Override

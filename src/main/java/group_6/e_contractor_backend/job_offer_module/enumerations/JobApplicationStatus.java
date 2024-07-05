@@ -4,5 +4,6 @@ public enum JobApplicationStatus {
     Sent,
     Accepted,
     Declined,
-    Approved
+    Approved,
+    Expired
 }

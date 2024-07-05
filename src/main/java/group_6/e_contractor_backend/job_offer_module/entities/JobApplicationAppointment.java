@@ -19,17 +19,22 @@ public class JobApplicationAppointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long appointmentId;
+
     @ManyToOne
     @JoinColumn(name = "applicationId")
     private JobApplication jobApplication;
+
     private String title;
     private String description;
     private String meetLink;
+
     @Enumerated(EnumType.STRING)
     private JobApplicationAppointmentType appointment_type;
     private String dotColor;
+
     @Enumerated(EnumType.STRING)
     private JobApplicationAppointmentStatus appointment_status;
+
     @Temporal(TemporalType.DATE)
     private Date startDate;
     private String appointment_duration;

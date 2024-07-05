@@ -6,7 +6,7 @@ import group_6.e_contractor_backend.job_offer_module.enumerations.*;
 import java.util.List;
 
 public interface JobOfferService {
-    JobOffer createJobOffer(JobOffer jobOffer);
+    JobOffer createJobOffer(JobOffer jobOffer,Long employerId);
     JobOffer updateJobOffer(JobOffer jobOffer);
     JobOffer getJobOfferByReference(String reference);
     JobOffer getJobOfferById(Long id);

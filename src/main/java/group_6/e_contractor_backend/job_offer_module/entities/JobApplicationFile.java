@@ -1,5 +1,6 @@
 package group_6.e_contractor_backend.job_offer_module.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class JobApplicationFile {
     private String applicationFileType;
     private Boolean isStudentFile;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "applicationId")
     private JobApplication jobApplication;

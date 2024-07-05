@@ -1,5 +1,6 @@
 package group_6.e_contractor_backend.job_offer_module.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import group_6.e_contractor_backend.job_offer_module.enumerations.JobApplicationStatus;
 import group_6.e_contractor_backend.job_offer_module.enumerations.JobOfferRequirementType;
 import jakarta.persistence.*;
@@ -42,8 +43,12 @@ public class JobApplication {
     @OneToMany(mappedBy = "jobApplication")
     private Set<JobApplicationFile> jobApplicationFiles;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "jobApplication")
     private Set<JobApplicationAppointment> jobApplicationAppointments;
+
+    @OneToMany(mappedBy = "jobApplication")
+    private Set<JobApplicationRequirement> requirements;
 
     @Enumerated(EnumType.STRING)
     private JobApplicationStatus applicationStatus;

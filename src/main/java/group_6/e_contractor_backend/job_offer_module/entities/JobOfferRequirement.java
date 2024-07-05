@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -27,4 +29,8 @@ public class JobOfferRequirement {
     @ManyToOne
     @JoinColumn(name = "offerId")
     private JobOffer jobOffer;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "jobOfferRequirement")
+    private Set<JobApplicationRequirement> applicationsRequirements;
 }
