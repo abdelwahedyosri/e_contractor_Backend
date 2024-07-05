@@ -22,6 +22,6 @@ public class PermissionEntity {
 
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "permissions")
+    @ManyToMany(mappedBy = "permissions")
     private Set<RoleEntity> roles = new HashSet<>();
 }

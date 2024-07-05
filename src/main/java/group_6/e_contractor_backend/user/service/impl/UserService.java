@@ -1,13 +1,14 @@
 package group_6.e_contractor_backend.user.service.impl;
 
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
+import group_6.e_contractor_backend.user.dto.UserCreationDTO;
 import group_6.e_contractor_backend.user.dto.UserDTO;
 import group_6.e_contractor_backend.user.entity.RoleEntity;
 import group_6.e_contractor_backend.user.entity.SocialAccountEntity;
 import group_6.e_contractor_backend.user.entity.UserEntity;
-import group_6.e_contractor_backend.user.mapper.UserMapper;
+import group_6.e_contractor_backend.user.mapper.UserMapperImpl;
 import group_6.e_contractor_backend.user.repository.IRoleRepository;
 import group_6.e_contractor_backend.user.repository.ISocialAccountRepository;
 import group_6.e_contractor_backend.user.repository.IUserRepository;
@@ -29,13 +30,13 @@ public class UserService implements IUserService {
 
     private final IUserRepository userRepository;
     private final IRoleRepository roleRepository;
-    private final UserMapper userMapper;
+    private final UserMapperImpl userMapper;
     private final ISocialAccountRepository socialAccountRepository;
     private final JwtUtil jwtUtil;
     private PasswordEncoder passwordEncoder;
     private JavaMailSender mailSender;
     @Autowired
-    public UserService(IUserRepository userRepository, IRoleRepository roleRepository, UserMapper userMapper, ISocialAccountRepository socialAccountRepository , JwtUtil jwtUtil, PasswordEncoder passwordEncoder, JavaMailSender mailSender) {
+    public UserService(IUserRepository userRepository, IRoleRepository roleRepository, UserMapperImpl userMapper, ISocialAccountRepository socialAccountRepository , JwtUtil jwtUtil, PasswordEncoder passwordEncoder, JavaMailSender mailSender) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userMapper = userMapper;
@@ -44,21 +45,57 @@ public class UserService implements IUserService {
         this.passwordEncoder=passwordEncoder;
         this.mailSender = mailSender;
     }
+    public String test (String test){
+        return passwordEncoder.encode(test);
+    }
+    public Optional<UserEntity> registerUser(UserCreationDTO userCreationDTO) {
 
-    @Override
-    public Optional<UserDTO> registerUser(UserDTO userDTO) {
-        if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("Email already exists");
+
+        // Map the UserCreationDTO to UserEntity
+        UserEntity userEntity = userMapper.toEntity(userCreationDTO);
+
+        // Set the password after encoding it
+        userEntity.setPassword(passwordEncoder.encode(userCreationDTO.getPassword()));
+
+        // Handle default values for nullable fields if they are not set in the DTO
+        if (userEntity.getIsActive() == null) {
+            userEntity.setIsActive(true); // Default value
         }
-        UserEntity userEntity = userMapper.toEntity(userDTO);
+        if (userEntity.getTwoWayVerificationEnabled() == null) {
+            userEntity.setTwoWayVerificationEnabled(false); // Default value
+        }
+        if (userEntity.getCreationDate() == null) {
+            userEntity.setCreationDate(LocalDateTime.now()); // Set current time as default
+        }
+        if (userEntity.getCreatedBy() == null) {
+            userEntity.setCreatedBy("system"); // Default value
+        }
+        if (userEntity.getIsDeleted() == null) {
+            userEntity.setIsDeleted(false); // Default value
+        }
+
+        // Save the user entity to the repository
         userEntity = userRepository.save(userEntity);
-        return Optional.of(userMapper.toDto(userEntity));
+
+        // Send a registration email
+        sendRegistrationEmail(userEntity);
+
+        return Optional.of(userEntity);
+    }
+
+    private void sendRegistrationEmail(UserEntity userEntity) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(userEntity.getEmail());
+        message.setSubject("Registration Confirmation");
+        message.setText("Dear " + userEntity.getUsername() + ",\n\nThank you for registering!");
+
+        mailSender.send(message);
     }
 
     @Override
-    public Optional<UserDTO> loginUser(String email, String password) {
+    public Optional<UserEntity> loginUser(String email, String password) {
         Optional<UserEntity> userOpt = userRepository.findByEmailAndPassword(email, password);
-        return userOpt.map(userMapper::toDto);
+        return userOpt;
     }
 
     @Override
@@ -98,9 +135,9 @@ public class UserService implements IUserService {
 
 
     @Override
-    public Optional<UserDTO> getUserById(String userId) {
+    public Optional<UserEntity> getUserById(String userId) {
         Optional<UserEntity> userOpt = userRepository.findById(Long.valueOf(userId));
-        return userOpt.map(userMapper::toDto);
+        return userOpt;
     }
 
     @Override
@@ -109,11 +146,10 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void updateUser(UserDTO userDTO) {
-        Optional<UserEntity> userOpt = userRepository.findById(userDTO.getUserId());
+    public void updateUser(UserEntity user) {
+        Optional<UserEntity> userOpt = userRepository.findById(user.getUserId());
         if (userOpt.isPresent()) {
-            UserEntity userEntity = userMapper.toEntity(userDTO);
-            userRepository.save(userEntity);
+            userRepository.save(user);
         } else {
             throw new IllegalArgumentException("User not found");
         }
@@ -260,12 +296,16 @@ public class UserService implements IUserService {
         mailSender.send(message);
     }
 
-    // Update user's password
-    public void updatePassword(String username, String newPassword) {
-        Optional<UserEntity> user = userRepository.findByUsername(username); // Assuming UserRepository has this method
-        if (user.isPresent()) {
-            user.get().setPassword(passwordEncoder.encode(newPassword)); // Encode the password before saving
-            //userRepository.save(user);
+    @Transactional
+    public void updatePassword(String email, String newPassword) {
+        Optional<UserEntity> userOptional = userRepository.findByEmail(email);
+        if (userOptional.isPresent()) {
+            UserEntity user = userOptional.get();
+            user.setPassword(passwordEncoder.encode(newPassword)); // Encode the password before saving
+            userRepository.save(user); // Save the UserEntity
+        } else {
+            // Handle the case when the user is not found
+            throw new RuntimeException("User not found");
         }
     }
 

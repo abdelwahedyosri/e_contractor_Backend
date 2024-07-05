@@ -3,6 +3,7 @@ package group_6.e_contractor_backend.user.service.spec;
 import group_6.e_contractor_backend.user.entity.PermissionEntity;
 
 import java.util.List;
+import java.util.Set;
 
 public interface IPermissionService {
 
@@ -15,4 +16,5 @@ public interface IPermissionService {
     PermissionEntity updatePermission(Long id, PermissionEntity permissionDetails);
 
     boolean deletePermission(Long id);
+    Set<PermissionEntity> getPermissionsByIds(Set<Long> ids);
 }

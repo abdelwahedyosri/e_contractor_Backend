@@ -5,11 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import group_6.e_contractor_backend.user.dto.UserDTO;
+import group_6.e_contractor_backend.user.dto.UserCreationDTO;
 import group_6.e_contractor_backend.user.entity.UserEntity;
 import group_6.e_contractor_backend.user.service.impl.UserService;
-import group_6.e_contractor_backend.user.service.spec.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +26,8 @@ public class UserController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<UserDTO> registerUser(@RequestBody UserDTO userDTO) {
-        Optional<UserDTO> createdUser = userService.registerUser(userDTO);
+    public ResponseEntity<UserEntity> registerUser(@RequestBody UserCreationDTO userCreationDTO) {
+        Optional<UserEntity> createdUser = userService.registerUser(userCreationDTO);
         if (createdUser.isPresent()) {
             return ResponseEntity.ok(createdUser.get());
         } else {
@@ -60,8 +58,8 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable String userId) {
-        Optional<UserDTO> user = userService.getUserById(userId);
+    public ResponseEntity<UserEntity> getUserById(@PathVariable String userId) {
+        Optional<UserEntity> user = userService.getUserById(userId);
         if (user.isPresent()) {
             return ResponseEntity.ok(user.get());
         } else {
@@ -76,9 +74,9 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<Void> updateUser(@RequestBody UserEntity user) {
         try {
-            userService.updateUser(userDTO);
+            userService.updateUser(user);
             return ResponseEntity.noContent().build();
         } catch (IllegalArgumentException e) {
             return ResponseEntity.notFound().build();
@@ -166,6 +164,11 @@ public class UserController {
         boolean exists = userService.existsByEmail(email);
         return ResponseEntity.ok(exists);
     }
+    @GetMapping("/test")
+    public String test() {
+        return userService.test("test");
+
+    }
 
     @PostMapping("/forgot-password")
     public ResponseEntity<?> forgotPassword(@RequestBody ForgotPasswordRequest request) {
@@ -226,5 +229,6 @@ public class UserController {
             this.newPassword = newPassword;
         }
     }
+
 }
 

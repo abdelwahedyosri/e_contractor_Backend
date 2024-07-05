@@ -1,17 +1,17 @@
 package group_6.e_contractor_backend.user.service.spec;
 
+import group_6.e_contractor_backend.user.dto.UserCreationDTO;
 import group_6.e_contractor_backend.user.dto.UserDTO;
 import group_6.e_contractor_backend.user.entity.UserEntity;
 import org.springframework.data.domain.Page;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface IUserService {
 
-    Optional<UserDTO> registerUser(UserDTO userDTO);
+    Optional<UserEntity> registerUser(UserCreationDTO userCreationDTO);
 
-    Optional<UserDTO> loginUser(String username, String password);
+    Optional<UserEntity> loginUser(String email, String password);
 
     void resetPassword(String email);
 
@@ -19,11 +19,11 @@ public interface IUserService {
 
     Page<UserEntity> getUsers(int page, int size, String search, String sortColumn, String sortDirection);
 
-    Optional<UserDTO> getUserById(String userId);
+    Optional<UserEntity> getUserById(String userId);
 
     void deleteUser(String userId);
 
-    void updateUser(UserDTO userDTO);
+    void updateUser(UserEntity user);
 
     void assignRoleToUser(String userId, String roleId);
 
@@ -48,4 +48,5 @@ public interface IUserService {
     void sendPasswordResetEmail(String email);
     void updatePassword(String username, String newPassword);
     boolean existsByEmail(String email);
+    String test (String test);
 }

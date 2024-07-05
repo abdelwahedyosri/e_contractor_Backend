@@ -1,8 +1,12 @@
 package group_6.e_contractor_backend.user.controller;
 
 
+import group_6.e_contractor_backend.user.dto.PermissionDTO;
 import group_6.e_contractor_backend.user.dto.RoleCreationDTO;
+import group_6.e_contractor_backend.user.dto.RoleDTO;
 import group_6.e_contractor_backend.user.entity.RoleEntity;
+import group_6.e_contractor_backend.user.entity.PermissionEntity;
+import group_6.e_contractor_backend.user.mapper.RoleMapperImpl;
 import group_6.e_contractor_backend.user.service.impl.RoleService;
 import group_6.e_contractor_backend.user.service.impl.UserService;
 import group_6.e_contractor_backend.user.service.spec.IRoleService;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/roles")
@@ -19,14 +24,16 @@ import java.util.Optional;
 public class RoleController {
 
     private final RoleService roleService;
+    private final RoleMapperImpl roleMapper;
 
-    public RoleController(RoleService roleService) {
+    public RoleController(RoleService roleService,RoleMapperImpl roleMapper) {
         this.roleService = roleService;
+        this.roleMapper = roleMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<RoleEntity>> getAllRoles() {
-        List<RoleEntity> roles = roleService.findAll();
+    public ResponseEntity<List<RoleDTO>> getAllRoles() {
+        List<RoleDTO> roles = roleService.findAll();
         return ResponseEntity.ok(roles);
     }
 
@@ -50,5 +57,18 @@ public class RoleController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<RoleDTO> updateRole(@PathVariable Long id, @RequestBody RoleCreationDTO roleCreationDto) {
+        RoleEntity updatedRole = roleService.updateRole(id, roleCreationDto);
+        RoleDTO roleDTO = roleMapper.toRoleDTO(updatedRole);
+        return ResponseEntity.ok(roleDTO);
+    }
+
+    @GetMapping("/name/{roleName}")
+    public ResponseEntity<RoleEntity> getRoleByRoleName(@PathVariable String roleName) {
+        Optional<RoleEntity> role = roleService.findByRole(roleName);
+        return role.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

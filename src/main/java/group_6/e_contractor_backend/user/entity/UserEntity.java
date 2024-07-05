@@ -28,16 +28,13 @@ public class UserEntity implements UserDetails {
     @JoinColumn(name = "role_id", nullable = false)
     private RoleEntity role;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String firstName;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String lastName;
 
-    @Column
-    private LocalDateTime birthDate;
-
-    @Column
+    @Column(nullable = true)
     private Long phoneNumber;
 
     @Column(nullable = false, unique = true)
@@ -46,13 +43,13 @@ public class UserEntity implements UserDetails {
     @Column(nullable = false, unique = true)
     private String username;
 
-    @Column
+    @Column(nullable = true)
     private String gender;
 
-    @Column
+    @Column(nullable = true)
     private String dob;
 
-    @Column
+    @Column(nullable = true)
     private String location;
 
     @Column(nullable = false)
@@ -61,25 +58,24 @@ public class UserEntity implements UserDetails {
     @Column(nullable = true)
     private Boolean isActive;
 
-
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDateTime creationDate;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String createdBy;
 
     @Column(nullable = true)
     private Boolean isDeleted;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UserImageEntity> userImages;
+    @Column(nullable = true)
+    private Boolean twoWayVerificationEnabled;
 
-    @Column(nullable = false)
-    private boolean twoWayVerificationEnabled;
+    @Column(nullable = true)
+    private String avatar;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(role.getRole()));
+        return role != null ? Collections.singleton(new SimpleGrantedAuthority(role.getRole())) : Collections.emptyList();
     }
 
     @Override
@@ -109,12 +105,12 @@ public class UserEntity implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return isActive;
+        return isActive != null && isActive;
     }
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SocialAccountEntity> socialAccounts;
 
-    @Column
+    @Column(nullable = true)
     private LocalDateTime lastLogin;
 }

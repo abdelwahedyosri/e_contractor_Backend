@@ -49,7 +49,12 @@ public class SecurityConfig {
                                 new AntPathRequestMatcher("/webjars/**"),
                                 new AntPathRequestMatcher("/swagger.json"),
                                 new AntPathRequestMatcher("/users/forgot-password"),
-                                new AntPathRequestMatcher("/users/reset-password")
+                                new AntPathRequestMatcher("/users/reset-password"),
+                                new AntPathRequestMatcher("/users/test"),
+                                new AntPathRequestMatcher("/api/register/candidate"),
+                                new AntPathRequestMatcher("/api/register/company")
+
+
 
                         ).permitAll()
                         .anyRequest().authenticated()
