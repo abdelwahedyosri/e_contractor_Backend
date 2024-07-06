@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201"})
 public class UserController {
 
     private final UserService userService;
@@ -49,7 +49,7 @@ public class UserController {
             @RequestParam(required = false) String sortColumn,
             @RequestParam(required = false) String sortDirection) {
 
-        Page<UserEntity> usersPage = userService.getUsers(page, size, search, sortColumn, sortDirection);
+        Page<UserEntity> usersPage = userService.getUsersExcludingSpecificRoles(page, size, search, sortColumn, sortDirection);
         Map<String, Object> response = new HashMap<>();
         response.put("users", usersPage.getContent());
         response.put("total", usersPage.getTotalElements());

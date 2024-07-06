@@ -25,4 +25,7 @@ public interface IUserRepository extends JpaRepository<UserEntity, Long> {
             "LOWER(u.lastName) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
             "LOWER(u.email) LIKE LOWER(CONCAT('%', :searchTerm, '%'))")
     Page<UserEntity> findBySearchTerm(@Param("searchTerm") String searchTerm, Pageable pageable);
+
+    @Query("SELECT u FROM UserEntity u WHERE u.role.role NOT IN (:excludedRoles)")
+    Page<UserEntity> findByRolesNotIn(@Param("excludedRoles") List<String> excludedRoles, Pageable pageable);
 }

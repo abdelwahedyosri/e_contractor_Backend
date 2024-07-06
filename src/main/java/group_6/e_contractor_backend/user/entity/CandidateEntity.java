@@ -32,9 +32,6 @@ public class CandidateEntity{
     private String phoneNumber;
 
     @Column(nullable = true)
-    private String gender;
-
-    @Column(nullable = true)
     private String dob;
 
     @Column(nullable = true)

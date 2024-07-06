@@ -4,6 +4,8 @@ import group_6.e_contractor_backend.user.dto.JwtRequest;
 import group_6.e_contractor_backend.user.dto.JwtResponse;
 import group_6.e_contractor_backend.user.service.impl.CustomUserDetailsService;
 import group_6.e_contractor_backend.user.util.JwtUtil;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,10 +23,12 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.HttpServletRequest; // Use jakarta.servlet package
 
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.security.Principal;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201"})
 public class AuthenticationController {
 
     @Autowired
@@ -35,6 +39,9 @@ public class AuthenticationController {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    @Autowired
+    private Environment env;
 
     @PostMapping("/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest jwtRequest) throws Exception {
@@ -65,7 +72,7 @@ public class AuthenticationController {
     public ResponseEntity<?> oauth2Callback(OAuth2AuthenticationToken authentication, HttpServletRequest request) {
         try {
             OAuth2User oAuth2User = authentication.getPrincipal();
-            String username = oAuth2User.getAttribute("email"); // Assuming the OAuth2 provider returns the email as the username
+            String username = oAuth2User.getAttribute("email");
             final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
             final String jwt = jwtUtil.generateToken(userDetails.getUsername());
@@ -80,5 +87,32 @@ public class AuthenticationController {
     public ResponseEntity<?> updateLastLogin(@AuthenticationPrincipal UserDetails userDetails) {
         userDetailsService.updateLastLogin(userDetails.getUsername());
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/oauth2/authorization/google")
+    public void redirectToGoogle(HttpServletResponse response) throws IOException {
+        String googleClientId = env.getProperty("spring.security.oauth2.client.registration.google.client-id");
+        String googleRedirectUri = env.getProperty("spring.security.oauth2.client.registration.google.redirect-uri");
+        String googleAuthUrl = "https://accounts.google.com/o/oauth2/auth"
+                + "?client_id=" + URLEncoder.encode(googleClientId, "UTF-8")
+                + "&redirect_uri=" + URLEncoder.encode(googleRedirectUri, "UTF-8")
+                + "&response_type=code"
+                + "&scope=" + URLEncoder.encode("openid profile email", "UTF-8");
+
+        response.sendRedirect(googleAuthUrl);
+    }
+
+    @GetMapping("/login/oauth2/code/google")
+    public ResponseEntity<JwtResponse> googleLogin(OAuth2AuthenticationToken authenticationToken) {
+        return handleOAuth2Login(authenticationToken);
+    }
+
+    private ResponseEntity<JwtResponse> handleOAuth2Login(OAuth2AuthenticationToken authenticationToken) {
+        OAuth2User oAuth2User = authenticationToken.getPrincipal();
+        String email = oAuth2User.getAttribute("email");
+        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+
+        String jwt = jwtUtil.generateToken(userDetails.getUsername());
+        return ResponseEntity.ok(new JwtResponse(jwt));
     }
 }

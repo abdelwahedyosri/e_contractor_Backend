@@ -1,6 +1,8 @@
 package group_6.e_contractor_backend.user.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import group_6.e_contractor_backend.user.dto.UserCreationDTO;
@@ -312,5 +314,19 @@ public class UserService implements IUserService {
     @Override
     public boolean existsByEmail(String email) {
         return userRepository.findByEmail(email).isPresent();
+    }
+    @Override
+    public Page<UserEntity> getUsersExcludingSpecificRoles(int page, int size, String search, String sortColumn, String sortDirection) {
+        Pageable pageable;
+        List<String> excludedRoles = Arrays.asList("company", "candidate"); // Roles to exclude
+
+        if (sortColumn != null && !sortColumn.isEmpty()) {
+            Sort sort = sortDirection.equalsIgnoreCase("desc") ? Sort.by(sortColumn).descending() : Sort.by(sortColumn).ascending();
+            pageable = PageRequest.of(page, size, sort);
+        } else {
+            pageable = PageRequest.of(page, size);
+        }
+
+        return userRepository.findByRolesNotIn(excludedRoles, pageable);
     }
 }

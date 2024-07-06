@@ -21,6 +21,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/register/company")
 @RequiredArgsConstructor
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201"})
 public class CompanyController {
 
     private final CompanyService companyService;
@@ -59,7 +60,7 @@ public class CompanyController {
         companyEntity.setPhoneNumber(phoneNumber);
         companyEntity.setWebsite(website);
 
-        companyService.registerCompany(userEntity, companyEntity);
+        companyService.registerCompany(userEntity, companyEntity, companyLogo);
 
         // Authenticate and generate token
         authenticationManager.authenticate(
