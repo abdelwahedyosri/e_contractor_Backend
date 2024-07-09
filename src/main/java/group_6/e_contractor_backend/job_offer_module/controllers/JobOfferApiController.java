@@ -27,6 +27,7 @@ public class JobOfferApiController {
     private final JobOfferConsultationRepository jobOfferConsultationRepository;
     private final StudentRepository studentRepository;
     private final JobApplicationRepository jobApplicationRepository;
+    private final JobApplicationApointmentRepository jobApplicationApointmentRepository;
 
 
     @PostMapping("create/{employerId}")
@@ -67,6 +68,20 @@ public class JobOfferApiController {
         response.put("applications", list);
         return response;
     }
+
+    @GetMapping("applications/reference/{reference}")
+    public Map<String, Object> listApplicationsByJobReference(@PathVariable String reference) {
+        Map<String, Object> response = new HashMap<>();
+        List<JobApplication> list = jobApplicationRepository.getJobApplicationsByJobOfferReferenceOrderByUpdateDate(reference);
+        JobOffer jobOffer = jobOfferService.getJobOfferByReference(reference);
+        List<JobApplicationApointment> appointmentsList = jobApplicationApointmentRepository.getJobJobApplicationApointmentsByJobApplicationJobOfferReference(reference);
+
+        response.put("applications", list);
+        response.put("jobOffer", jobOffer);
+        response.put("appointments", appointmentsList);
+        return response;
+    }
+
     @GetMapping("skills/{status}")
     public Map<String, Object> listSavedSkills(@PathVariable String status) {
         Map<String, Object> response = new HashMap<>();

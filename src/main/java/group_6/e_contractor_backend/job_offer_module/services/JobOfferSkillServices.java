@@ -5,7 +5,7 @@ import group_6.e_contractor_backend.job_offer_module.repositories.JobOfferSkillR
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +24,7 @@ public class JobOfferSkillServices implements JobOfferSkillService {
             return null;
         }
 
-        jobOfferSkill.setCreationDate(LocalDate.now());
+        jobOfferSkill.setCreationDate(LocalDateTime.now());
         jobOfferSkill.setCreatedBy(1L);
         jobOfferSkill.setIsDeleted(false);
 

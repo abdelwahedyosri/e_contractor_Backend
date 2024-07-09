@@ -5,7 +5,7 @@ import group_6.e_contractor_backend.job_offer_module.repositories.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +21,7 @@ public class JobOfferServices implements JobOfferService {
     private final EmployerRepository employerRepository;
     @Override
     public JobOffer createJobOffer(JobOffer jobOffer,Long employerId) {
-        LocalDate currentDate = LocalDate.now();
+        LocalDateTime currentDate = LocalDateTime.now();
         Employer employer = employerRepository.findById(employerId).orElse(null);
         jobOffer.setEmployer(employer);
         jobOffer.setCreatedBy(1L);
@@ -81,10 +81,10 @@ public class JobOfferServices implements JobOfferService {
         existingJobOffer.setAllowSimpleApplications(jobOffer.getAllowSimpleApplications());
 
         existingJobOffer.setUpdatedBy(1L);
-        existingJobOffer.setUpdateDate(LocalDate.now());
+        existingJobOffer.setUpdateDate(LocalDateTime.now());
 
         if (JobOfferStatus.Published.equals(jobOffer.getStatus()) && existingJobOffer.getPublishingDate() == null) {
-            existingJobOffer.setPublishingDate(LocalDate.now());
+            existingJobOffer.setPublishingDate(LocalDateTime.now());
         }
 
         // Save the updated job offer

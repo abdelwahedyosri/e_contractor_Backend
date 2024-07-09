@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -47,7 +47,7 @@ public class JobApplicationServices implements JobApplicationService{
 
     @Override
     public JobApplication createJobApplication(JobApplication jobApplication,Long offerId,Long studentId) {
-        LocalDate currentDate = LocalDate.now();
+        LocalDateTime currentDate = LocalDateTime.now();
         JobOffer jobOffer = jobOfferRepository.findById(offerId).orElse(null);
         Student student = studentRepository.findById(studentId).orElse(null);
         jobApplication.setCreatedBy(1L);
@@ -68,6 +68,8 @@ public class JobApplicationServices implements JobApplicationService{
                 JobFile jobFile = applicationFile.getJobFile();
                 applicationFile.setJobFile(jobFile);
                 applicationFile.setJobApplication(jobApplication);
+                applicationFile.setCreatedBy(1L);
+                applicationFile.setCreationDate(currentDate);
                 jobApplicationFileRepository.save(applicationFile);
             }
         }
@@ -147,7 +149,7 @@ public class JobApplicationServices implements JobApplicationService{
             jobFile.setFileExtension(fileExtension);
             jobFile.setIsActive(true);
             jobFile.setCreatedBy(1L);
-            jobFile.setCreationDate(LocalDate.now());
+            jobFile.setCreationDate(LocalDateTime.now());
 
             // Save the JobFile entity to the database
             return jobFileRepository.save(jobFile);

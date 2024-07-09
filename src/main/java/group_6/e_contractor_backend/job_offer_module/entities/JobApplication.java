@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -47,23 +47,23 @@ public class JobApplication {
     @OneToMany(mappedBy = "jobApplication")
     private Set<JobApplicationAppointment> jobApplicationAppointments;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "jobApplication")
+    private Set<JobApplicationApointment> jobApplicationApointments;
+
     @OneToMany(mappedBy = "jobApplication")
     private Set<JobApplicationRequirement> requirements;
 
+    @Column(length = 100)
     @Enumerated(EnumType.STRING)
     private JobApplicationStatus applicationStatus;
 
     private Long declinedBy;
-    @Temporal(TemporalType.DATE)
-    private LocalDate declineDate;
-    @Temporal(TemporalType.DATE)
-    private LocalDate acceptedDate;
-    @Temporal(TemporalType.DATE)
-    private LocalDate approvalDate;
+    private LocalDateTime declineDate;
+    private LocalDateTime acceptedDate;
+    private LocalDateTime approvalDate;
     private Long createdBy;
-    @Temporal(TemporalType.DATE)
-    private LocalDate creationDate;
-    @Temporal(TemporalType.DATE)
-    private LocalDate updateDate;
+    private LocalDateTime creationDate;
+    private LocalDateTime updateDate;
 
 }

@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 @Entity
@@ -50,8 +50,8 @@ public class JobOffer {
     private String category;
     private Long openPositions;
 
-    private LocalDate deadline;
-    private LocalDate publishingDate;
+    private LocalDateTime deadline;
+    private LocalDateTime publishingDate;
 
     private String educationLevel;
     private String experience;
@@ -83,10 +83,10 @@ public class JobOffer {
 
     private String consultations;
     private Long createdBy;
-    private LocalDate creationDate;
+    private LocalDateTime creationDate;
     private Long updatedBy;
-    private LocalDate updateDate;
+    private LocalDateTime updateDate;
     private Boolean isDeleted;
     private Long deletedBy;
-    private LocalDate deleteDate;
+    private LocalDateTime deleteDate;
 }

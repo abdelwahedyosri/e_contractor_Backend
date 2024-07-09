@@ -9,7 +9,11 @@ import java.util.List;
 
 public interface JobApplicationRepository extends JpaRepository<JobApplication, Long> {
     List<JobApplication> getJobApplicationsByJobOfferOfferId(Long offerId);
-    List<JobApplication> getJobApplicationsByStudentStudentId(Long offerId);
+
+    List<JobApplication> getJobApplicationsByJobOfferReferenceOrderByUpdateDate(String reference);
+    List<JobApplication> getJobApplicationsByStudentStudentId(Long studentId);
+
+    List<JobApplication> getJobApplicationsByJobOfferEmployerEmployerIdOrderByUpdateDate(Long employerId);
     List<JobApplication> getJobApplicationsByStudentStudentIdAndApplicationStatusIn(Long offerId, List<JobApplicationStatus> statuses);
 
     JobApplication getJobApplicationByReference(String reference);

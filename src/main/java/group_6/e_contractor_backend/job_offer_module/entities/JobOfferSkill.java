@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
@@ -21,7 +21,7 @@ public class JobOfferSkill {
     private String label;
 
     private Long createdBy;
-    private LocalDate creationDate;
+    private LocalDateTime creationDate;
     private Boolean isDeleted;
 
 }

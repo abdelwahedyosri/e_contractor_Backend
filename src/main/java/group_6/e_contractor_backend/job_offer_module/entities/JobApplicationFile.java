@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -37,10 +37,8 @@ public class JobApplicationFile {
     private Boolean isActive;
 
     private Long createdBy;
-    @Temporal(TemporalType.DATE)
-    private LocalDate creationDate;
+    private LocalDateTime creationDate;
 
     private Long deletedBy;
-    @Temporal(TemporalType.DATE)
-    private LocalDate deleteDate;
+    private LocalDateTime deleteDate;
 }
