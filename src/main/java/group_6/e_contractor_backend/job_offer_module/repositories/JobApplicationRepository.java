@@ -18,4 +18,6 @@ public interface JobApplicationRepository extends JpaRepository<JobApplication, 
 
     JobApplication getJobApplicationByReference(String reference);
 
+    List<JobApplication> findALLByOrderByUpdateDate();
+
 }

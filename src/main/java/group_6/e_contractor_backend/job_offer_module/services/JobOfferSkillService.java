@@ -6,12 +6,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface JobOfferSkillService  {
-    JobOfferSkill createJobOfferSkill(String skill);
+    JobOfferSkill createJobOfferSkill(String skill,Long employerId);
     JobOfferSkill restoreJobOfferSkill(JobOfferSkill jobOfferSkill);
 
     List<JobOfferSkill> listJobOfferSkillsByStatus(String status);
-    Optional<JobOfferSkill> listJobOfferSkills();
+    List<JobOfferSkill> listJobOfferSkills();
     JobOfferSkill updateJobOfferSkill(JobOfferSkill jobOfferSkill);
-    JobOfferSkill deleteJobOfferSkill(Long offerId);
+    JobOfferSkill deleteJobOfferSkill(Long skillId);
+    JobOfferSkill restoreJobOfferSkill(Long skillId);
 }
 

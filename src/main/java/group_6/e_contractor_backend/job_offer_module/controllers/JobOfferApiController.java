@@ -57,7 +57,9 @@ public class JobOfferApiController {
     public Map<String, Object> listPublished() {
         Map<String, Object> response = new HashMap<>();
         List<JobOffer> list = jobOfferService.listJobOffersByStatus(JobOfferStatus.Published);
+        List<JobApplication> applications = jobApplicationRepository.findAll();
         response.put("published", list);
+        response.put("applications", applications);
         return response;
     }
 

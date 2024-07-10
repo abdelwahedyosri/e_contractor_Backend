@@ -24,4 +24,8 @@ public class JobOfferSkill {
     private LocalDateTime creationDate;
     private Boolean isDeleted;
 
+    @ManyToOne
+    @JoinColumn(name = "employerId")
+    private Employer employer;
+
 }

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("private/job-offer")
 @CrossOrigin(origins = "*")
@@ -27,10 +29,17 @@ public class JobOfferPrivateApiController {
     private final JobApplicationApointmentRepository jobApplicationApointmentRepository;
 
     @GetMapping("reference/{reference}")
-    public JobOffer getJobOfferByReference(@PathVariable String reference) {
-        return jobOfferService.getJobOfferByReference(reference);
-    }
+    public Map<String, Object> listApplicationsByJobReference(@PathVariable String reference) {
+        Map<String, Object> response = new HashMap<>();
+        List<JobApplication> list = jobApplicationRepository.getJobApplicationsByJobOfferReferenceOrderByUpdateDate(reference);
+        JobOffer jobOffer = jobOfferService.getJobOfferByReference(reference);
+        List<JobApplicationApointment> appointmentsList = jobApplicationApointmentRepository.getJobJobApplicationApointmentsByJobApplicationJobOfferReference(reference);
 
+        response.put("applications", list);
+        response.put("jobOffer", jobOffer);
+        response.put("appointments", appointmentsList);
+        return response;
+    }
     @GetMapping("drafts")
     public Map<String, Object> listDrafts() {
         Map<String, Object> response = new HashMap<>();
@@ -43,15 +52,27 @@ public class JobOfferPrivateApiController {
     public Map<String, Object> listPublished() {
         Map<String, Object> response = new HashMap<>();
         List<JobOffer> list = jobOfferService.listJobOffersByStatus(JobOfferStatus.Published);
+        List<JobApplication> applications = jobApplicationRepository.findAll();
         response.put("published", list);
+        response.put("applications", applications);
         return response;
     }
 
-    @GetMapping("skills/{status}")
-    public Map<String, Object> listSavedSkills(@PathVariable String status) {
+    @GetMapping("skills")
+    public Map<String, Object> listSavedSkills() {
         Map<String, Object> response = new HashMap<>();
-        List<JobOfferSkill> skills = jobOfferSkillService.listJobOfferSkillsByStatus(status);
+        List<JobOfferSkill> skills = jobOfferSkillService.listJobOfferSkills();
         response.put("skills", skills);
         return response;
+    }
+
+    @PostMapping("skill/{skillId}/delete")
+    public JobOfferSkill deleteSavedSkill(@PathVariable Long skillId) {
+        return jobOfferSkillService.deleteJobOfferSkill(skillId);
+    }
+
+    @PostMapping("skill/{skillId}/restore")
+    public JobOfferSkill restoreSavedSkill(@PathVariable Long skillId) {
+        return jobOfferSkillService.restoreJobOfferSkill(skillId);
     }
 }

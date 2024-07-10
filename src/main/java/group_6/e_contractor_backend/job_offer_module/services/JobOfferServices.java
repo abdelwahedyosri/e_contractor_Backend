@@ -37,7 +37,7 @@ public class JobOfferServices implements JobOfferService {
         if (jobOffer.getSkills() != null && !jobOffer.getSkills().isEmpty()) {
             List<String> skillsList = Arrays.asList(jobOffer.getSkills().split(","));
             for (String skill : skillsList) {
-                jobOfferSkillService.createJobOfferSkill(skill);
+                jobOfferSkillService.createJobOfferSkill(skill,employerId);
             }
         }
         if (jobOffer.getRequirements() != null && !jobOffer.getRequirements().isEmpty()) {
@@ -89,12 +89,12 @@ public class JobOfferServices implements JobOfferService {
 
         // Save the updated job offer
         JobOffer updatedJobOffer = jobOfferRepository.save(existingJobOffer);
-
+        Long employerId = existingJobOffer.getEmployer().getEmployerId();
         // Update or create skills
         if (jobOffer.getSkills() != null && !jobOffer.getSkills().isEmpty()) {
             List<String> skillsList = Arrays.asList(jobOffer.getSkills().split(","));
             for (String skill : skillsList) {
-                jobOfferSkillService.createJobOfferSkill(skill);
+                jobOfferSkillService.createJobOfferSkill(skill,employerId);
             }
         }
 

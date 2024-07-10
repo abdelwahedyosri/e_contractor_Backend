@@ -1,6 +1,8 @@
 package group_6.e_contractor_backend.job_offer_module.services;
 
+import group_6.e_contractor_backend.job_offer_module.entities.Employer;
 import group_6.e_contractor_backend.job_offer_module.entities.JobOfferSkill;
+import group_6.e_contractor_backend.job_offer_module.repositories.EmployerRepository;
 import group_6.e_contractor_backend.job_offer_module.repositories.JobOfferSkillRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,9 +15,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class JobOfferSkillServices implements JobOfferSkillService {
     private final JobOfferSkillRepository jobOfferSkillRepository;
+    private final EmployerRepository employerRepository;
 
     @Override
-    public JobOfferSkill createJobOfferSkill(String skill) {
+    public JobOfferSkill createJobOfferSkill(String skill,Long employerId) {
         JobOfferSkill jobOfferSkill = new JobOfferSkill();
         jobOfferSkill.setLabel(skill.trim()); // Trim to remove leading/trailing whitespaces
         Optional<JobOfferSkill> existingSkill = jobOfferSkillRepository.getJobOfferSkillByLabel(jobOfferSkill.getLabel());
@@ -27,6 +30,8 @@ public class JobOfferSkillServices implements JobOfferSkillService {
         jobOfferSkill.setCreationDate(LocalDateTime.now());
         jobOfferSkill.setCreatedBy(1L);
         jobOfferSkill.setIsDeleted(false);
+        Employer employer = employerRepository.findById(employerId).orElse(null);
+        jobOfferSkill.setEmployer(employer);
 
         return jobOfferSkillRepository.save(jobOfferSkill);
     }
@@ -47,8 +52,8 @@ public class JobOfferSkillServices implements JobOfferSkillService {
     }
 
     @Override
-    public Optional<JobOfferSkill> listJobOfferSkills() {
-        return null;
+    public List<JobOfferSkill> listJobOfferSkills() {
+        return jobOfferSkillRepository.findAllByOrderByLabelAsc();
     }
 
     @Override
@@ -66,7 +71,18 @@ public class JobOfferSkillServices implements JobOfferSkillService {
     }
 
     @Override
-    public JobOfferSkill deleteJobOfferSkill(Long offerId) {
-        return null;
+    public JobOfferSkill deleteJobOfferSkill(Long skillId) {
+        JobOfferSkill skill = jobOfferSkillRepository.getJobOfferSkillBySkillId(skillId);
+        skill.setIsDeleted(true);
+        jobOfferSkillRepository.save(skill);
+        return skill;
+    }
+
+    @Override
+    public JobOfferSkill restoreJobOfferSkill(Long skillId) {
+        JobOfferSkill skill = jobOfferSkillRepository.getJobOfferSkillBySkillId(skillId);
+        skill.setIsDeleted(false);
+        jobOfferSkillRepository.save(skill);
+        return skill;
     }
 }

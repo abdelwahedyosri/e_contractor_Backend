@@ -8,5 +8,7 @@ import java.util.Optional;
 
 public interface JobOfferSkillRepository extends JpaRepository<JobOfferSkill, Long>{
     Optional<JobOfferSkill> getJobOfferSkillByLabel(String label);
+    JobOfferSkill getJobOfferSkillBySkillId(Long skillId);
+    List<JobOfferSkill> findAllByOrderByLabelAsc();
     List<JobOfferSkill> getJobOfferSkillByIsDeleted(boolean isDeleted);
 }

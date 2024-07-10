@@ -25,4 +25,8 @@ public class Employer {
     @JsonIgnore
     @OneToMany(mappedBy = "employer")
     private Set<JobOffer> jobOffers;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "employer")
+    private Set<JobOfferSkill> jobSkills;
 }
