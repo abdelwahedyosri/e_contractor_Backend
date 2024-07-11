@@ -28,4 +28,6 @@ public interface IUserRepository extends JpaRepository<UserEntity, Long> {
 
     @Query("SELECT u FROM UserEntity u WHERE u.role.role NOT IN (:excludedRoles)")
     Page<UserEntity> findByRolesNotIn(@Param("excludedRoles") List<String> excludedRoles, Pageable pageable);
+
+    UserEntity getUserEntityByUsername(String username);
 }

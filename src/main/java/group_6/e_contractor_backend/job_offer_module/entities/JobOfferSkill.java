@@ -1,6 +1,8 @@
 package group_6.e_contractor_backend.job_offer_module.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import group_6.e_contractor_backend.job_offer_module.enumerations.JobOfferRequirementType;
+import group_6.e_contractor_backend.user.entity.CompanyEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,8 +26,8 @@ public class JobOfferSkill {
     private LocalDateTime creationDate;
     private Boolean isDeleted;
 
-    @ManyToOne
-    @JoinColumn(name = "employerId")
-    private Employer employer;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "companyId")
+    private CompanyEntity employer;
 
 }

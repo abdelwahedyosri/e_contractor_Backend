@@ -80,7 +80,7 @@ public class UserService implements IUserService {
         userEntity = userRepository.save(userEntity);
 
         // Send a registration email
-        sendRegistrationEmail(userEntity);
+      //  sendRegistrationEmail(userEntity);
 
         return Optional.of(userEntity);
     }
@@ -227,6 +227,7 @@ public class UserService implements IUserService {
         String username = jwtUtil.extractUsername(token);
         return getUserByUsername(username);
     }
+
     public UserEntity updateUserField(String username, String fieldName, String fieldValue) {
         Optional<UserEntity> userOptional = userRepository.findByUsername(username);
         if (userOptional.isPresent()) {
@@ -328,5 +329,11 @@ public class UserService implements IUserService {
         }
 
         return userRepository.findByRolesNotIn(excludedRoles, pageable);
+    }
+
+    @Override
+    public UserEntity getConnectedUser(String token) {
+        String username = jwtUtil.extractUsername(token);
+        return userRepository.getUserEntityByUsername(username);
     }
 }

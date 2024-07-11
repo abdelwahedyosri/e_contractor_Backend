@@ -1,5 +1,10 @@
 package group_6.e_contractor_backend.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import group_6.e_contractor_backend.job_offer_module.entities.JobApplication;
+import group_6.e_contractor_backend.job_offer_module.entities.JobOfferConsultation;
+import group_6.e_contractor_backend.job_offer_module.entities.JobOfferInterest;
+import group_6.e_contractor_backend.job_offer_module.entities.JobOfferSaving;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -61,5 +66,21 @@ public class CandidateEntity{
 
     @Column(nullable = true)
     private String skills;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "student")
+    private Set<JobApplication> jobApplications;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "student")
+    private Set<JobOfferInterest> jobInterests;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "student")
+    private Set<JobOfferConsultation> jobConsultations;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "student")
+    private Set<JobOfferSaving> jobSavings;
 
 }

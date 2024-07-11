@@ -4,6 +4,8 @@ import group_6.e_contractor_backend.job_offer_module.entities.*;
 import group_6.e_contractor_backend.job_offer_module.enumerations.JobOfferStatus;
 import group_6.e_contractor_backend.job_offer_module.repositories.*;
 import group_6.e_contractor_backend.job_offer_module.services.*;
+import group_6.e_contractor_backend.user.entity.CandidateEntity;
+import group_6.e_contractor_backend.user.repository.ICandidateRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("job-offer")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201"})
 @RequiredArgsConstructor
 public class JobOfferApiController {
 
@@ -25,7 +27,7 @@ public class JobOfferApiController {
     private final JobOfferInterestRepository jobOfferInterestRepository;
     private final JobOfferSavingRepository jobOfferSavingRepository;
     private final JobOfferConsultationRepository jobOfferConsultationRepository;
-    private final StudentRepository studentRepository;
+    private final ICandidateRepository candidateRepository;
     private final JobApplicationRepository jobApplicationRepository;
     private final JobApplicationApointmentRepository jobApplicationApointmentRepository;
 
@@ -95,7 +97,7 @@ public class JobOfferApiController {
     @PostMapping("interest/add/{offerId}/{studentId}")
     public JobOfferInterest interestJobOffer(@RequestBody JobOfferInterest interest, @PathVariable Long offerId, @PathVariable Long studentId) {
         JobOffer jobOffer = jobOfferRepository.findById(offerId).orElse(null);
-        Student student = studentRepository.findById(studentId).orElse(null);
+        CandidateEntity student = candidateRepository.findById(studentId).orElse(null);
 
         if (jobOffer != null && student != null) {
             interest.setJobOffer(jobOffer);
@@ -125,7 +127,7 @@ public class JobOfferApiController {
     @PostMapping("saving/add/{offerId}/{studentId}")
     public JobOfferSaving interestJobOffer(@RequestBody JobOfferSaving saving, @PathVariable Long offerId, @PathVariable Long studentId) {
         JobOffer jobOffer = jobOfferRepository.findById(offerId).orElse(null);
-        Student student = studentRepository.findById(studentId).orElse(null);
+        CandidateEntity student = candidateRepository.findById(studentId).orElse(null);
 
         if (jobOffer != null && student != null) {
             saving.setJobOffer(jobOffer);
@@ -155,7 +157,7 @@ public class JobOfferApiController {
     public JobOfferConsultation interestJobOffer(@RequestBody JobOfferConsultation consultation, @PathVariable Long offerId, @PathVariable Long studentId) {
 
             JobOffer jobOffer = jobOfferRepository.findById(offerId).orElse(null);
-            Student student = studentRepository.findById(studentId).orElse(null);
+            CandidateEntity student = candidateRepository.findById(studentId).orElse(null);
 
             if (jobOffer != null && student != null) {
                 consultation.setJobOffer(jobOffer);

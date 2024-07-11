@@ -1,8 +1,10 @@
 package group_6.e_contractor_backend.job_offer_module.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import group_6.e_contractor_backend.job_offer_module.enumerations.JobApplicationStatus;
 import group_6.e_contractor_backend.job_offer_module.enumerations.JobOfferRequirementType;
+import group_6.e_contractor_backend.user.entity.CandidateEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,8 +38,8 @@ public class JobApplication {
     private JobOffer jobOffer;
 
     @ManyToOne
-    @JoinColumn(name = "studentId")
-    private Student student;
+    @JoinColumn(name = "candidateId")
+    private CandidateEntity student;
 
 
     @OneToMany(mappedBy = "jobApplication")

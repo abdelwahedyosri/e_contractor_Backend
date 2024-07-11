@@ -50,4 +50,6 @@ public interface IUserService {
     boolean existsByEmail(String email);
     String test (String test);
     Page<UserEntity> getUsersExcludingSpecificRoles(int page, int size, String search, String sortColumn, String sortDirection);
+
+    UserEntity getConnectedUser(String token);
 }

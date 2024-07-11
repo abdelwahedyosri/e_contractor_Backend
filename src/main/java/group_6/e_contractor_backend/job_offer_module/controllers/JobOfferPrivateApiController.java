@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("private/job-offer")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201"})
 @RequiredArgsConstructor
 public class JobOfferPrivateApiController {
     private final JobOfferService jobOfferService;
@@ -24,7 +24,6 @@ public class JobOfferPrivateApiController {
     private final JobOfferInterestRepository jobOfferInterestRepository;
     private final JobOfferSavingRepository jobOfferSavingRepository;
     private final JobOfferConsultationRepository jobOfferConsultationRepository;
-    private final StudentRepository studentRepository;
     private final JobApplicationRepository jobApplicationRepository;
     private final JobApplicationApointmentRepository jobApplicationApointmentRepository;
 

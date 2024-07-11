@@ -6,7 +6,12 @@ import java.util.Map;
 import java.util.Optional;
 
 import group_6.e_contractor_backend.user.dto.UserCreationDTO;
+import group_6.e_contractor_backend.user.entity.CandidateEntity;
+import group_6.e_contractor_backend.user.entity.CompanyEntity;
 import group_6.e_contractor_backend.user.entity.UserEntity;
+import group_6.e_contractor_backend.user.repository.ICandidateRepository;
+import group_6.e_contractor_backend.user.repository.ICompanyRepository;
+import group_6.e_contractor_backend.user.repository.IUserRepository;
 import group_6.e_contractor_backend.user.service.impl.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -19,9 +24,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
-
-    public UserController(UserService userService) {
+    private final ICompanyRepository companyRepository;
+    private final ICandidateRepository candidateRepository;
+    public UserController(UserService userService,ICompanyRepository companyRepository,ICandidateRepository candidateRepository) {
         this.userService = userService;
+        this.companyRepository=companyRepository;
+        this.candidateRepository=candidateRepository;
     }
 
 
@@ -136,6 +144,18 @@ public class UserController {
     @GetMapping("/username")
     public String getUsername(@RequestParam String token) {
         return String.valueOf(userService.getUserFromToken(token));
+    }
+
+    @GetMapping("/get-me")
+    public  ResponseEntity<Map<String, Object>> getMe(@RequestParam String token) {
+        UserEntity user = userService.getConnectedUser(token);
+        Map<String, Object> response = new HashMap<>();
+        CompanyEntity company = companyRepository.getCompanyEntityByUserUsername(user.getUsername());
+        CandidateEntity candidate = candidateRepository.getCandidateEntityByUserUsername(user.getUsername());
+        response.put("candidate", candidate);
+        response.put("company", company);
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/user")

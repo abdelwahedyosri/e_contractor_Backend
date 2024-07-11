@@ -1,7 +1,9 @@
 package group_6.e_contractor_backend.job_offer_module.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import group_6.e_contractor_backend.job_offer_module.enumerations.*;
+import group_6.e_contractor_backend.user.entity.CompanyEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -78,8 +80,9 @@ public class JobOffer {
     private Set<JobApplication> jobApplications;
 
     @ManyToOne
-    @JoinColumn(name = "employerId")
-    private Employer employer;
+    @JoinColumn(name = "companyId")
+    private CompanyEntity employer;
+
 
     private String consultations;
     private Long createdBy;

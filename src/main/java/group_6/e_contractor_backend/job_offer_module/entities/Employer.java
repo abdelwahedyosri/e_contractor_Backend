@@ -22,11 +22,4 @@ public class Employer {
 
     private String companyName;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "employer")
-    private Set<JobOffer> jobOffers;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "employer")
-    private Set<JobOfferSkill> jobSkills;
 }

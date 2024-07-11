@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface JobApplicationApointmentRepository extends JpaRepository<JobApplicationApointment, Long> {
-    List<JobApplicationApointment> getJobJobApplicationApointmentsByJobApplicationStudentStudentId(Long studentId);
-    List<JobApplicationApointment> getJobJobApplicationApointmentsByJobApplicationJobOfferEmployerEmployerId(Long employerId);
+    List<JobApplicationApointment> getJobJobApplicationApointmentsByJobApplicationStudentCandidateId(Long studentId);
+    List<JobApplicationApointment> getJobJobApplicationApointmentsByJobApplicationJobOfferEmployerCompanyId(Long employerId);
 
     List<JobApplicationApointment> getJobJobApplicationApointmentsByJobApplicationReferenceOrderByStartDateDesc(String reference);
     List<JobApplicationApointment> getJobJobApplicationApointmentsByJobApplicationJobOfferReference(String reference);

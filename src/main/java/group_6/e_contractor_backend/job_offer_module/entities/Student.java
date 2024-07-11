@@ -21,21 +21,5 @@ public class Student {
     private Long studentId;
 
     private String name;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "student")
-    private Set<JobApplication> jobApplications;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "student")
-    private Set<JobOfferInterest> jobInterests;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "student")
-    private Set<JobOfferConsultation> jobConsultations;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "student")
-    private Set<JobOfferSaving> jobSavings;
 }
 

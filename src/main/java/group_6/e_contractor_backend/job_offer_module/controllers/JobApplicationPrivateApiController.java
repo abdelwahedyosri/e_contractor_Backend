@@ -19,7 +19,7 @@ import java.nio.file.Files;
 import java.util.*;
 @RestController
 @RequestMapping("private/job-application")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:4201"})
 @RequiredArgsConstructor
 public class JobApplicationPrivateApiController {
     private final JobApplicationService jobApplicationService;
@@ -78,7 +78,7 @@ public class JobApplicationPrivateApiController {
     @GetMapping("all/student/{studentId}")
     public Map<String, Object> listStudentAllApplications(@PathVariable Long studentId) {
         Map<String, Object> response = new HashMap<>();
-        List<JobApplication> list = jobApplicationRepository.getJobApplicationsByStudentStudentId(studentId);
+        List<JobApplication> list = jobApplicationRepository.getJobApplicationsByStudentCandidateId(studentId);
         response.put("applications", list);
         return response;
     }
@@ -86,7 +86,7 @@ public class JobApplicationPrivateApiController {
     @GetMapping("all/employer/{employerId}")
     public Map<String, Object> listEmployerAllApplications(@PathVariable Long employerId) {
         Map<String, Object> response = new HashMap<>();
-        List<JobApplication> list = jobApplicationRepository.getJobApplicationsByJobOfferEmployerEmployerIdOrderByUpdateDate(employerId);
+        List<JobApplication> list = jobApplicationRepository.getJobApplicationsByJobOfferEmployerCompanyIdOrderByUpdateDate(employerId);
         response.put("applications", list);
         return response;
     }
@@ -95,7 +95,7 @@ public class JobApplicationPrivateApiController {
     public Map<String, Object> listStudentInProgressApplications(@PathVariable Long studentId) {
         Map<String, Object> response = new HashMap<>();
         List<JobApplicationStatus> statuses = Arrays.asList(JobApplicationStatus.Sent, JobApplicationStatus.Accepted);
-        List<JobApplication> list = jobApplicationRepository.getJobApplicationsByStudentStudentIdAndApplicationStatusIn(studentId,statuses);
+        List<JobApplication> list = jobApplicationRepository.getJobApplicationsByStudentCandidateIdAndApplicationStatusIn(studentId,statuses);
         response.put("applications", list);
         return response;
     }
@@ -104,7 +104,7 @@ public class JobApplicationPrivateApiController {
     public Map<String, Object> listStudentAppliedApplications(@PathVariable Long studentId) {
         Map<String, Object> response = new HashMap<>();
         List<JobApplicationStatus> statuses = Arrays.asList(JobApplicationStatus.Approved, JobApplicationStatus.Declined, JobApplicationStatus.Expired, JobApplicationStatus.Rejected);
-        List<JobApplication> list = jobApplicationRepository.getJobApplicationsByStudentStudentIdAndApplicationStatusIn(studentId,statuses);
+        List<JobApplication> list = jobApplicationRepository.getJobApplicationsByStudentCandidateIdAndApplicationStatusIn(studentId,statuses);
         response.put("applications", list);
         return response;
     }
@@ -112,7 +112,7 @@ public class JobApplicationPrivateApiController {
     @GetMapping("appointments/student/{studentId}")
     public Map<String, Object> listStudentApplicationsAppointments(@PathVariable Long studentId) {
         Map<String, Object> response = new HashMap<>();
-        List<JobApplicationApointment> list = jobApplicationApointmentRepository.getJobJobApplicationApointmentsByJobApplicationStudentStudentId(studentId);
+        List<JobApplicationApointment> list = jobApplicationApointmentRepository.getJobJobApplicationApointmentsByJobApplicationStudentCandidateId(studentId);
         response.put("appointments", list);
         return response;
     }
@@ -120,7 +120,7 @@ public class JobApplicationPrivateApiController {
     @GetMapping("appointments/employer/{employerId}")
     public Map<String, Object> listEmployerApplicationsAppointments(@PathVariable Long employerId) {
         Map<String, Object> response = new HashMap<>();
-        List<JobApplicationApointment> list = jobApplicationApointmentRepository.getJobJobApplicationApointmentsByJobApplicationJobOfferEmployerEmployerId(employerId);
+        List<JobApplicationApointment> list = jobApplicationApointmentRepository.getJobJobApplicationApointmentsByJobApplicationJobOfferEmployerCompanyId(employerId);
         response.put("appointments", list);
         return response;
     }
@@ -128,7 +128,7 @@ public class JobApplicationPrivateApiController {
     @GetMapping("files/student/{studentId}")
     public Map<String, Object> listStudentApplicationsFiles(@PathVariable Long studentId) {
         Map<String, Object> response = new HashMap<>();
-        List<JobApplicationFile> list = jobApplicationFileRepository.getJobApplicationFilesByJobApplicationStudentStudentId(studentId);
+        List<JobApplicationFile> list = jobApplicationFileRepository.getJobApplicationFilesByJobApplicationStudentCandidateId(studentId);
         response.put("files", list);
         return response;
     }

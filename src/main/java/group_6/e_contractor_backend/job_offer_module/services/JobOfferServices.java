@@ -2,6 +2,8 @@ package group_6.e_contractor_backend.job_offer_module.services;
 import group_6.e_contractor_backend.job_offer_module.entities.*;
 import group_6.e_contractor_backend.job_offer_module.enumerations.*;
 import group_6.e_contractor_backend.job_offer_module.repositories.*;
+import group_6.e_contractor_backend.user.entity.CompanyEntity;
+import group_6.e_contractor_backend.user.repository.ICompanyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +20,11 @@ public class JobOfferServices implements JobOfferService {
     private final JobOfferRepository jobOfferRepository;
     private final JobOfferRequirementRepository jobOfferRequirementRepository;
     private final JobOfferSkillService jobOfferSkillService;
-    private final EmployerRepository employerRepository;
+    private final ICompanyRepository companyRepository;
     @Override
     public JobOffer createJobOffer(JobOffer jobOffer,Long employerId) {
         LocalDateTime currentDate = LocalDateTime.now();
-        Employer employer = employerRepository.findById(employerId).orElse(null);
+        CompanyEntity employer = companyRepository.findById(employerId).orElse(null);
         jobOffer.setEmployer(employer);
         jobOffer.setCreatedBy(1L);
         jobOffer.setCreationDate(currentDate);
@@ -89,7 +91,7 @@ public class JobOfferServices implements JobOfferService {
 
         // Save the updated job offer
         JobOffer updatedJobOffer = jobOfferRepository.save(existingJobOffer);
-        Long employerId = existingJobOffer.getEmployer().getEmployerId();
+        Long employerId = existingJobOffer.getEmployer().getCompanyId();
         // Update or create skills
         if (jobOffer.getSkills() != null && !jobOffer.getSkills().isEmpty()) {
             List<String> skillsList = Arrays.asList(jobOffer.getSkills().split(","));

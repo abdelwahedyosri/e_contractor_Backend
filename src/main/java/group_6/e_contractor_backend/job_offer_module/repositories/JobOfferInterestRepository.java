@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface JobOfferInterestRepository extends JpaRepository<JobOfferInterest, Long> {
     Optional<JobOfferInterest> getJobOfferInterestsByJobOfferOfferId(Long offerId);
 
-    Optional<JobOfferInterest> getJobOfferInterestsByStudentStudentId(Long studentId);
+    Optional<JobOfferInterest> getJobOfferInterestsByStudentCandidateId(Long studentId);
 }

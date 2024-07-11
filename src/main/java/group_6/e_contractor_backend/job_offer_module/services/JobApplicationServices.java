@@ -3,6 +3,10 @@ package group_6.e_contractor_backend.job_offer_module.services;
 import group_6.e_contractor_backend.job_offer_module.entities.*;
 import group_6.e_contractor_backend.job_offer_module.enumerations.*;
 import group_6.e_contractor_backend.job_offer_module.repositories.*;
+import group_6.e_contractor_backend.user.entity.CandidateEntity;
+import group_6.e_contractor_backend.user.entity.CompanyEntity;
+import group_6.e_contractor_backend.user.repository.ICandidateRepository;
+import group_6.e_contractor_backend.user.repository.ICompanyRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +34,7 @@ public class JobApplicationServices implements JobApplicationService{
     private final JobApplicationFileRepository jobApplicationFileRepository;
     private final JobFileRepository jobFileRepository ;
     private final JobOfferRepository jobOfferRepository ;
-    private final StudentRepository studentRepository ;
+    private final ICandidateRepository candidateRepository ;
     private final JobApplicationRequirementRepository jobApplicationRequirementRepository;
 
 
@@ -49,7 +53,7 @@ public class JobApplicationServices implements JobApplicationService{
     public JobApplication createJobApplication(JobApplication jobApplication,Long offerId,Long studentId) {
         LocalDateTime currentDate = LocalDateTime.now();
         JobOffer jobOffer = jobOfferRepository.findById(offerId).orElse(null);
-        Student student = studentRepository.findById(studentId).orElse(null);
+        CandidateEntity student = candidateRepository.findById(studentId).orElse(null);
         jobApplication.setCreatedBy(1L);
         jobApplication.setCreationDate(currentDate);
         jobApplication.setUpdateDate(currentDate);

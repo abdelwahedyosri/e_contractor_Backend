@@ -27,7 +27,6 @@ public class JobApplicationApointment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "applicationId")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private JobApplication jobApplication;
 
     private String title;

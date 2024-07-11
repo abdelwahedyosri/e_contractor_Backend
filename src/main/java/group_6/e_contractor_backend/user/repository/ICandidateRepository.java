@@ -1,6 +1,7 @@
 package group_6.e_contractor_backend.user.repository;
 
 import group_6.e_contractor_backend.user.entity.CandidateEntity;
+import group_6.e_contractor_backend.user.entity.CompanyEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,4 +18,8 @@ public interface ICandidateRepository extends JpaRepository<CandidateEntity, Lon
                                         @Param("skills") String skills,
                                         @Param("jobType") String jobType,
                                         Pageable pageable);
+
+
+    CandidateEntity getCandidateEntityByUserUsername(String username);
+
 }

@@ -11,10 +11,10 @@ public interface JobApplicationRepository extends JpaRepository<JobApplication, 
     List<JobApplication> getJobApplicationsByJobOfferOfferId(Long offerId);
 
     List<JobApplication> getJobApplicationsByJobOfferReferenceOrderByUpdateDate(String reference);
-    List<JobApplication> getJobApplicationsByStudentStudentId(Long studentId);
+    List<JobApplication> getJobApplicationsByStudentCandidateId(Long studentId);
 
-    List<JobApplication> getJobApplicationsByJobOfferEmployerEmployerIdOrderByUpdateDate(Long employerId);
-    List<JobApplication> getJobApplicationsByStudentStudentIdAndApplicationStatusIn(Long offerId, List<JobApplicationStatus> statuses);
+    List<JobApplication> getJobApplicationsByJobOfferEmployerCompanyIdOrderByUpdateDate(Long employerId);
+    List<JobApplication> getJobApplicationsByStudentCandidateIdAndApplicationStatusIn(Long studentId, List<JobApplicationStatus> statuses);
 
     JobApplication getJobApplicationByReference(String reference);
 

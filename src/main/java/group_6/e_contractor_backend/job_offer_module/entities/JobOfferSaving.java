@@ -1,6 +1,8 @@
 package group_6.e_contractor_backend.job_offer_module.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import group_6.e_contractor_backend.user.entity.CandidateEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +24,7 @@ public class JobOfferSaving {
     @JoinColumn(name = "offerId")
     private JobOffer jobOffer;
 
-    @ManyToOne
-    @JoinColumn(name = "studentId")
-    private Student student;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "candidateId")
+    private CandidateEntity student;
 }

@@ -4,6 +4,8 @@ import group_6.e_contractor_backend.job_offer_module.entities.Employer;
 import group_6.e_contractor_backend.job_offer_module.entities.JobOfferSkill;
 import group_6.e_contractor_backend.job_offer_module.repositories.EmployerRepository;
 import group_6.e_contractor_backend.job_offer_module.repositories.JobOfferSkillRepository;
+import group_6.e_contractor_backend.user.entity.CompanyEntity;
+import group_6.e_contractor_backend.user.repository.ICompanyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class JobOfferSkillServices implements JobOfferSkillService {
     private final JobOfferSkillRepository jobOfferSkillRepository;
-    private final EmployerRepository employerRepository;
+    private final ICompanyRepository companyRepository;
 
     @Override
     public JobOfferSkill createJobOfferSkill(String skill,Long employerId) {
@@ -30,7 +32,7 @@ public class JobOfferSkillServices implements JobOfferSkillService {
         jobOfferSkill.setCreationDate(LocalDateTime.now());
         jobOfferSkill.setCreatedBy(1L);
         jobOfferSkill.setIsDeleted(false);
-        Employer employer = employerRepository.findById(employerId).orElse(null);
+        CompanyEntity employer = companyRepository.findById(employerId).orElse(null);
         jobOfferSkill.setEmployer(employer);
 
         return jobOfferSkillRepository.save(jobOfferSkill);
