@@ -80,7 +80,7 @@ public class UserService implements IUserService {
         userEntity = userRepository.save(userEntity);
 
         // Send a registration email
-      //  sendRegistrationEmail(userEntity);
+        sendRegistrationEmail(userEntity);
 
         return Optional.of(userEntity);
     }

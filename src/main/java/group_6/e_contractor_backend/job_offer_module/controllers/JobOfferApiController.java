@@ -47,10 +47,10 @@ public class JobOfferApiController {
         return  jobOfferService.updateJobOffer(jobOffer);
     }
 
-    @GetMapping("drafts")
-    public Map<String, Object> listDrafts() {
+    @GetMapping("drafts/{employerId}")
+    public Map<String, Object> listDrafts(@PathVariable Long employerId) {
         Map<String, Object> response = new HashMap<>();
-        List<JobOffer> drafts = jobOfferService.listJobOffersByStatus(JobOfferStatus.Draft);
+        List<JobOffer> drafts = jobOfferRepository.findByEmployerCompanyIdAndStatusOrderByUpdateDateDesc(employerId,JobOfferStatus.Draft);
         response.put("drafts", drafts);
         return response;
     }
@@ -60,6 +60,16 @@ public class JobOfferApiController {
         Map<String, Object> response = new HashMap<>();
         List<JobOffer> list = jobOfferService.listJobOffersByStatus(JobOfferStatus.Published);
         List<JobApplication> applications = jobApplicationRepository.findAll();
+        response.put("published", list);
+        response.put("applications", applications);
+        return response;
+    }
+
+    @GetMapping("published/{employerId}")
+    public Map<String, Object> listEmployerPublished(@PathVariable Long employerId) {
+        Map<String, Object> response = new HashMap<>();
+        List<JobOffer> list = jobOfferRepository.findByEmployerCompanyIdAndStatusOrderByUpdateDateDesc(employerId,JobOfferStatus.Published);
+        List<JobApplication> applications = jobApplicationRepository.getJobApplicationsByJobOfferEmployerCompanyIdOrderByUpdateDate(employerId);
         response.put("published", list);
         response.put("applications", applications);
         return response;

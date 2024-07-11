@@ -165,6 +165,11 @@ public class JobOfferServices implements JobOfferService {
     }
 
     @Override
+    public List<JobOffer> listJobOffersByStatusByEmployerId(JobOfferStatus status, Long employerId) {
+        return null;
+    }
+
+    @Override
     public List<JobOffer> listJobOffersByType(JobOfferType type) {
         return jobOfferRepository.getJobOffersByType(type);
     }

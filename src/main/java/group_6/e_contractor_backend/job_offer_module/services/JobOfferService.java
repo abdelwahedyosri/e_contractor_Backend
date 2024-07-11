@@ -13,6 +13,8 @@ public interface JobOfferService {
     List<JobOffer> listJobOffers();
     List<JobOffer> listAllJobOffers();
     List<JobOffer> listJobOffersByStatus(JobOfferStatus status);
+
+    List<JobOffer> listJobOffersByStatusByEmployerId(JobOfferStatus status,Long employerId);
     List<JobOffer> listJobOffersByType(JobOfferType type);
     List<JobOffer> listJobOffersNotDeleted(Boolean isDeleted);
     JobOffer publishJobOffer(Long offerId);

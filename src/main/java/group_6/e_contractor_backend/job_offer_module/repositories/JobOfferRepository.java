@@ -9,7 +9,7 @@ import java.util.List;
 public interface JobOfferRepository extends JpaRepository<JobOffer, Long> {
     List<JobOffer> getJobOffersByStatus(JobOfferStatus status);
     List<JobOffer> getJobOffersByStatusOrderByUpdateDateDesc(JobOfferStatus status);
-
+    List<JobOffer> findByEmployerCompanyIdAndStatusOrderByUpdateDateDesc(Long employerId, JobOfferStatus status);
     List<JobOffer> getJobOffersByType(JobOfferType type);
     List<JobOffer> getJobOffersByIsDeleted(Boolean isDeleted);
     JobOffer getJobOfferByReference(String reference);
