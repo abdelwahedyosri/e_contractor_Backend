@@ -26452,3 +26452,685 @@ io.jsonwebtoken.MalformedJwtException: JWT strings must contain exactly 2 period
 2024-07-12 21:44:22 - Secured GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzIwODE0NDA5LCJleHAiOjE3MjA4NTA0MDl9.LqClNPgUpz1C7S2GIlZx5i7ibzME3y2JL0sBP21KjGM
 2024-07-12 21:44:22 - Securing GET /job-application/job-offers-kpis/student/2
 2024-07-12 21:44:22 - Secured GET /job-application/job-offers-kpis/student/2
+2024-07-12 21:47:02 - Securing GET /users/get-me?token=
+2024-07-12 21:47:02 - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+io.jsonwebtoken.MalformedJwtException: JWT strings must contain exactly 2 period characters. Found: 0
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:235)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:481)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:541)
+	at group_6.e_contractor_backend.user.util.JwtUtil.extractAllClaims(JwtUtil.java:35)
+	at group_6.e_contractor_backend.user.util.JwtUtil.extractClaim(JwtUtil.java:28)
+	at group_6.e_contractor_backend.user.util.JwtUtil.extractUsername(JwtUtil.java:20)
+	at group_6.e_contractor_backend.user.security.JwtRequestFilter.doFilterInternal(JwtRequestFilter.java:38)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.doFilterInternal(OAuth2AuthorizationRequestRedirectFilter.java:198)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-07-12 21:47:02 - Securing GET /error?token=
+2024-07-12 21:47:02 - Set SecurityContextHolder to anonymous SecurityContext
+2024-07-12 21:47:02 - Redirecting to http://localhost:8080/oauth2/authorization/google
+2024-07-12 21:47:02 - Securing GET /oauth2/authorization/google
+2024-07-12 21:47:02 - Redirecting to https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=298057441663-6nngglicu565pg341qktslj8aqctdtot.apps.googleusercontent.com&scope=openid%20profile%20email&state=xtKlBs6o2pG0Cz8TiFuT0fAiCM19YYi4R9cnbD9qsco%3D&redirect_uri=http://localhost:8080/login/oauth2/code/google&nonce=-dSS1af3JyHNjNYHYBN0vxhnonEExDmDv8uNCIvRx6A
+2024-07-12 21:47:04 - Securing GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzIwODE0NDA5LCJleHAiOjE3MjA4NTA0MDl9.LqClNPgUpz1C7S2GIlZx5i7ibzME3y2JL0sBP21KjGM
+2024-07-12 21:47:04 - Secured GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzIwODE0NDA5LCJleHAiOjE3MjA4NTA0MDl9.LqClNPgUpz1C7S2GIlZx5i7ibzME3y2JL0sBP21KjGM
+2024-07-12 21:47:04 - Securing GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzIwODE0NDA5LCJleHAiOjE3MjA4NTA0MDl9.LqClNPgUpz1C7S2GIlZx5i7ibzME3y2JL0sBP21KjGM
+2024-07-12 21:47:04 - Secured GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzIwODE0NDA5LCJleHAiOjE3MjA4NTA0MDl9.LqClNPgUpz1C7S2GIlZx5i7ibzME3y2JL0sBP21KjGM
+2024-07-12 21:47:04 - Securing GET /job-application/job-offers-kpis/student/2
+2024-07-12 21:47:04 - Secured GET /job-application/job-offers-kpis/student/2
+2024-07-12 21:47:09 - Securing GET /users/get-me?token=
+2024-07-12 21:47:09 - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+io.jsonwebtoken.MalformedJwtException: JWT strings must contain exactly 2 period characters. Found: 0
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:235)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:481)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:541)
+	at group_6.e_contractor_backend.user.util.JwtUtil.extractAllClaims(JwtUtil.java:35)
+	at group_6.e_contractor_backend.user.util.JwtUtil.extractClaim(JwtUtil.java:28)
+	at group_6.e_contractor_backend.user.util.JwtUtil.extractUsername(JwtUtil.java:20)
+	at group_6.e_contractor_backend.user.security.JwtRequestFilter.doFilterInternal(JwtRequestFilter.java:38)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.doFilterInternal(OAuth2AuthorizationRequestRedirectFilter.java:198)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-07-12 21:47:09 - Securing GET /error?token=
+2024-07-12 21:47:09 - Set SecurityContextHolder to anonymous SecurityContext
+2024-07-12 21:47:09 - Redirecting to http://localhost:8080/oauth2/authorization/google
+2024-07-12 21:47:09 - Securing GET /oauth2/authorization/google
+2024-07-12 21:47:09 - Redirecting to https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=298057441663-6nngglicu565pg341qktslj8aqctdtot.apps.googleusercontent.com&scope=openid%20profile%20email&state=n6SLHm65KbnpPFsa-0ZrB-HB9NdC_v-K15HFjhkirFQ%3D&redirect_uri=http://localhost:8080/login/oauth2/code/google&nonce=nx7XQ25L76HYdfRTg43p92FOEjwglwoEJvpzw1NI6dc
+2024-07-12 21:47:11 - Securing GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzIwODE0NDA5LCJleHAiOjE3MjA4NTA0MDl9.LqClNPgUpz1C7S2GIlZx5i7ibzME3y2JL0sBP21KjGM
+2024-07-12 21:47:11 - Secured GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzIwODE0NDA5LCJleHAiOjE3MjA4NTA0MDl9.LqClNPgUpz1C7S2GIlZx5i7ibzME3y2JL0sBP21KjGM
+2024-07-12 21:47:11 - Securing GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzIwODE0NDA5LCJleHAiOjE3MjA4NTA0MDl9.LqClNPgUpz1C7S2GIlZx5i7ibzME3y2JL0sBP21KjGM
+2024-07-12 21:47:11 - Secured GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzIwODE0NDA5LCJleHAiOjE3MjA4NTA0MDl9.LqClNPgUpz1C7S2GIlZx5i7ibzME3y2JL0sBP21KjGM
+2024-07-12 21:47:11 - Securing GET /job-application/job-offers-kpis/student/2
+2024-07-12 21:47:11 - Secured GET /job-application/job-offers-kpis/student/2
+2024-07-12 21:47:14 - Securing GET /users/get-me?token=
+2024-07-12 21:47:14 - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+io.jsonwebtoken.MalformedJwtException: JWT strings must contain exactly 2 period characters. Found: 0
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:235)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:481)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:541)
+	at group_6.e_contractor_backend.user.util.JwtUtil.extractAllClaims(JwtUtil.java:35)
+	at group_6.e_contractor_backend.user.util.JwtUtil.extractClaim(JwtUtil.java:28)
+	at group_6.e_contractor_backend.user.util.JwtUtil.extractUsername(JwtUtil.java:20)
+	at group_6.e_contractor_backend.user.security.JwtRequestFilter.doFilterInternal(JwtRequestFilter.java:38)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.doFilterInternal(OAuth2AuthorizationRequestRedirectFilter.java:198)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-07-12 21:47:14 - Securing GET /error?token=
+2024-07-12 21:47:14 - Set SecurityContextHolder to anonymous SecurityContext
+2024-07-12 21:47:14 - Redirecting to http://localhost:8080/oauth2/authorization/google
+2024-07-12 21:47:14 - Securing GET /oauth2/authorization/google
+2024-07-12 21:47:14 - Redirecting to https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=298057441663-6nngglicu565pg341qktslj8aqctdtot.apps.googleusercontent.com&scope=openid%20profile%20email&state=WPayZHf2IX0kvU27qfN-bBtrnBJvtz36gyvOqr5KMNM%3D&redirect_uri=http://localhost:8080/login/oauth2/code/google&nonce=YRocQ2ZGuJVP7OlxW6a4UZUai8VcvYkgq6-HuoLPe7g
+2024-07-12 21:47:16 - Securing GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzIwODE0NDA5LCJleHAiOjE3MjA4NTA0MDl9.LqClNPgUpz1C7S2GIlZx5i7ibzME3y2JL0sBP21KjGM
+2024-07-12 21:47:16 - Secured GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzIwODE0NDA5LCJleHAiOjE3MjA4NTA0MDl9.LqClNPgUpz1C7S2GIlZx5i7ibzME3y2JL0sBP21KjGM
+2024-07-12 21:47:16 - Securing GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzIwODE0NDA5LCJleHAiOjE3MjA4NTA0MDl9.LqClNPgUpz1C7S2GIlZx5i7ibzME3y2JL0sBP21KjGM
+2024-07-12 21:47:16 - Secured GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwiaWF0IjoxNzIwODE0NDA5LCJleHAiOjE3MjA4NTA0MDl9.LqClNPgUpz1C7S2GIlZx5i7ibzME3y2JL0sBP21KjGM
+2024-07-12 21:47:16 - Securing GET /job-application/job-offers-kpis/student/2
+2024-07-12 21:47:16 - Secured GET /job-application/job-offers-kpis/student/2
+2024-07-12 21:49:58 - Securing OPTIONS /update-last-login
+2024-07-12 21:49:58 - Securing POST /update-last-login
+2024-07-12 21:49:58 - Secured POST /update-last-login
+2024-07-12 21:50:09 - Securing OPTIONS /login
+2024-07-12 21:50:09 - Securing POST /login
+2024-07-12 21:50:09 - Set SecurityContextHolder to anonymous SecurityContext
+2024-07-12 21:50:09 - Secured POST /login
+2024-07-12 21:50:10 - Authenticated user
+2024-07-12 21:50:10 - Securing OPTIONS /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:10 - Securing GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:10 - Secured GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:10 - Securing GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:10 - Secured GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:10 - Securing OPTIONS /job-offer/published/1
+2024-07-12 21:50:10 - Securing GET /job-offer/published/1
+2024-07-12 21:50:10 - Secured GET /job-offer/published/1
+2024-07-12 21:50:10 - Securing GET /job-offer/skills/not_deleted
+2024-07-12 21:50:10 - Secured GET /job-offer/skills/not_deleted
+2024-07-12 21:50:14 - Securing GET /users/get-me?token=
+2024-07-12 21:50:14 - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+io.jsonwebtoken.MalformedJwtException: JWT strings must contain exactly 2 period characters. Found: 0
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:235)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:481)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:541)
+	at group_6.e_contractor_backend.user.util.JwtUtil.extractAllClaims(JwtUtil.java:35)
+	at group_6.e_contractor_backend.user.util.JwtUtil.extractClaim(JwtUtil.java:28)
+	at group_6.e_contractor_backend.user.util.JwtUtil.extractUsername(JwtUtil.java:20)
+	at group_6.e_contractor_backend.user.security.JwtRequestFilter.doFilterInternal(JwtRequestFilter.java:38)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.doFilterInternal(OAuth2AuthorizationRequestRedirectFilter.java:198)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-07-12 21:50:14 - Securing GET /error?token=
+2024-07-12 21:50:14 - Set SecurityContextHolder to anonymous SecurityContext
+2024-07-12 21:50:14 - Redirecting to http://localhost:8080/oauth2/authorization/google
+2024-07-12 21:50:14 - Securing GET /oauth2/authorization/google
+2024-07-12 21:50:14 - Redirecting to https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=298057441663-6nngglicu565pg341qktslj8aqctdtot.apps.googleusercontent.com&scope=openid%20profile%20email&state=qup0GtOJZIjIbnTuosdBD8bN1HqL6tc04kvPetlkAVE%3D&redirect_uri=http://localhost:8080/login/oauth2/code/google&nonce=2P4J-8yj7ohPN7TQxjhxnEGCtAfW6dfIwY48Nh2XATg
+2024-07-12 21:50:15 - Securing GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:15 - Secured GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:16 - Securing GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:16 - Secured GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:16 - Securing GET /job-offer/published/1
+2024-07-12 21:50:16 - Secured GET /job-offer/published/1
+2024-07-12 21:50:16 - Securing GET /job-offer/skills/not_deleted
+2024-07-12 21:50:16 - Secured GET /job-offer/skills/not_deleted
+2024-07-12 21:50:25 - Securing GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:25 - Secured GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:25 - Securing GET /job-offer/skills/not_deleted
+2024-07-12 21:50:25 - Secured GET /job-offer/skills/not_deleted
+2024-07-12 21:50:27 - Securing GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:27 - Secured GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:27 - Securing GET /job-offer/published/1
+2024-07-12 21:50:27 - Secured GET /job-offer/published/1
+2024-07-12 21:50:40 - Securing GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:40 - Secured GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:40 - Securing OPTIONS /job-application/job-offers-kpis/employer/1
+2024-07-12 21:50:40 - Securing GET /job-application/job-offers-kpis/employer/1
+2024-07-12 21:50:40 - Secured GET /job-application/job-offers-kpis/employer/1
+2024-07-12 21:50:41 - Securing GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:41 - Secured GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:41 - Securing GET /job-offer/published/1
+2024-07-12 21:50:41 - Secured GET /job-offer/published/1
+2024-07-12 21:50:48 - Securing GET /users/get-me?token=
+2024-07-12 21:50:48 - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+io.jsonwebtoken.MalformedJwtException: JWT strings must contain exactly 2 period characters. Found: 0
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:235)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:481)
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:541)
+	at group_6.e_contractor_backend.user.util.JwtUtil.extractAllClaims(JwtUtil.java:35)
+	at group_6.e_contractor_backend.user.util.JwtUtil.extractClaim(JwtUtil.java:28)
+	at group_6.e_contractor_backend.user.util.JwtUtil.extractUsername(JwtUtil.java:20)
+	at group_6.e_contractor_backend.user.security.JwtRequestFilter.doFilterInternal(JwtRequestFilter.java:38)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:227)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:221)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.doFilterInternal(OAuth2AuthorizationRequestRedirectFilter.java:198)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:195)
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113)
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74)
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:230)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:389)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2024-07-12 21:50:48 - Securing GET /error?token=
+2024-07-12 21:50:48 - Set SecurityContextHolder to anonymous SecurityContext
+2024-07-12 21:50:48 - Redirecting to http://localhost:8080/oauth2/authorization/google
+2024-07-12 21:50:48 - Securing GET /oauth2/authorization/google
+2024-07-12 21:50:48 - Redirecting to https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=298057441663-6nngglicu565pg341qktslj8aqctdtot.apps.googleusercontent.com&scope=openid%20profile%20email&state=QHfzazmU9x133M8G5iFqLP3UTmdyGZCrdpZkTa0zNb8%3D&redirect_uri=http://localhost:8080/login/oauth2/code/google&nonce=sqgwZ7pRhKdZXNZwU6pWjpqO7oJOjY7_cG9woVK19WY
+2024-07-12 21:50:49 - Securing GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:49 - Secured GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:49 - Securing OPTIONS /job-offer/reference/O-55Y3X5C0
+2024-07-12 21:50:49 - Securing GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:49 - Securing GET /job-offer/reference/O-55Y3X5C0
+2024-07-12 21:50:49 - Secured GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:50:49 - Secured GET /job-offer/reference/O-55Y3X5C0
+2024-07-12 21:50:49 - Securing OPTIONS /job-application/job-offer-kpis/O-55Y3X5C0
+2024-07-12 21:50:49 - Securing GET /job-application/job-offer-kpis/O-55Y3X5C0
+2024-07-12 21:50:49 - Secured GET /job-application/job-offer-kpis/O-55Y3X5C0
+2024-07-12 21:50:57 - Securing OPTIONS /job-offer/applications/reference/O-55Y3X5C0
+2024-07-12 21:50:57 - Securing GET /job-offer/applications/reference/O-55Y3X5C0
+2024-07-12 21:50:57 - Secured GET /job-offer/applications/reference/O-55Y3X5C0
+2024-07-12 21:50:58 - Securing GET /job-offer/reference/O-55Y3X5C0
+2024-07-12 21:50:58 - Secured GET /job-offer/reference/O-55Y3X5C0
+2024-07-12 21:50:58 - Securing OPTIONS /job-offer/applications/1
+2024-07-12 21:50:58 - Securing GET /job-offer/skills/not_deleted
+2024-07-12 21:50:58 - Securing GET /job-offer/applications/1
+2024-07-12 21:50:58 - Secured GET /job-offer/skills/not_deleted
+2024-07-12 21:50:58 - Secured GET /job-offer/applications/1
+2024-07-12 21:51:00 - Securing GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:51:00 - Secured GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:51:00 - Securing GET /job-application/job-offer-kpis/O-55Y3X5C0
+2024-07-12 21:51:00 - Secured GET /job-application/job-offer-kpis/O-55Y3X5C0
+2024-07-12 21:52:47 - Securing GET /job-offer/reference/O-55Y3X5C0
+2024-07-12 21:52:47 - Secured GET /job-offer/reference/O-55Y3X5C0
+2024-07-12 21:52:47 - Securing GET /job-offer/applications/1
+2024-07-12 21:52:47 - Securing GET /job-offer/skills/not_deleted
+2024-07-12 21:52:47 - Secured GET /job-offer/skills/not_deleted
+2024-07-12 21:52:47 - Secured GET /job-offer/applications/1
+2024-07-12 21:52:49 - Securing GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:52:49 - Secured GET /users/get-me?token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjb21wYW55Y28iLCJpYXQiOjE3MjA4MTc0MTAsImV4cCI6MTcyMDg1MzQxMH0.nnAFn7SANN97U9cG0u0oszBKhCsH8SuYxvRuUfDn65I
+2024-07-12 21:52:49 - Securing GET /job-application/job-offer-kpis/O-55Y3X5C0
+2024-07-12 21:52:49 - Secured GET /job-application/job-offer-kpis/O-55Y3X5C0
+2024-07-12 21:54:47 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-12 21:54:47 - HikariPool-1 - Shutdown initiated...
+2024-07-12 21:54:47 - HikariPool-1 - Shutdown completed.
+2024-07-12 21:54:52 - Starting EContractorBackendApplication using Java 21.0.1 with PID 21360 (C:\Users\rihen\OneDrive\Bureau\PI 2024\E_contractor_Backend\target\classes started by rihen in C:\Users\rihen\OneDrive\Bureau\PI 2024\E_contractor_Backend)
+2024-07-12 21:54:52 - Running with Spring Boot v3.3.0, Spring v6.1.8
+2024-07-12 21:54:52 - No active profile set, falling back to 1 default profile: "default"
+2024-07-12 21:54:53 - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-07-12 21:54:53 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-12 21:54:53 - Finished Spring Data repository scanning in 120 ms. Found 24 JPA repository interfaces.
+2024-07-12 21:54:54 - Tomcat initialized with port 8080 (http)
+2024-07-12 21:54:54 - Starting service [Tomcat]
+2024-07-12 21:54:54 - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-07-12 21:54:54 - Initializing Spring embedded WebApplicationContext
+2024-07-12 21:54:54 - Root WebApplicationContext: initialization completed in 1885 ms
+2024-07-12 21:54:54 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-12 21:54:54 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-12 21:54:54 - HHH000026: Second-level cache disabled
+2024-07-12 21:54:54 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-12 21:54:54 - HikariPool-1 - Starting...
+2024-07-12 21:54:54 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@114b203
+2024-07-12 21:54:54 - HikariPool-1 - Start completed.
+2024-07-12 21:54:55 - HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2024-07-12 21:54:56 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-12 21:54:57 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-12 21:54:57 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-07-12 21:54:58 - Filter 'jwtRequestFilter' configured for use
+2024-07-12 21:54:58 - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-07-12 21:54:59 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-12 21:54:59 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1dea0730, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7dfe23c2, org.springframework.security.web.context.SecurityContextHolderFilter@700fec90, org.springframework.security.web.header.HeaderWriterFilter@78026a45, org.springframework.web.filter.CorsFilter@285290a1, org.springframework.security.web.authentication.logout.LogoutFilter@14443c86, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@159d2313, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@16c230c, group_6.e_contractor_backend.user.security.JwtRequestFilter@2703fabd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6b3decaa, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1963b057, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@29f32a41, org.springframework.security.web.session.SessionManagementFilter@7c553e61, org.springframework.security.web.access.ExceptionTranslationFilter@474998da, org.springframework.security.web.access.intercept.AuthorizationFilter@5426f313]
+2024-07-12 21:55:00 - Tomcat started on port 8080 (http) with context path '/'
+2024-07-12 21:55:00 - Started EContractorBackendApplication in 8.067 seconds (process running for 8.777)
+2024-07-12 21:59:07 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-12 21:59:07 - Initializing Servlet 'dispatcherServlet'
+2024-07-12 21:59:07 - Completed initialization in 1 ms
+2024-07-12 21:59:07 - Securing OPTIONS /login
+2024-07-12 21:59:07 - Securing POST /login
+2024-07-12 21:59:07 - Set SecurityContextHolder to anonymous SecurityContext
+2024-07-12 21:59:07 - Secured POST /login
+2024-07-12 21:59:07 - Authenticated user
+2024-07-12 22:01:39 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-12 22:01:39 - HikariPool-1 - Shutdown initiated...
+2024-07-12 22:01:39 - HikariPool-1 - Shutdown completed.
+2024-07-12 22:01:45 - Starting EContractorBackendApplication using Java 21.0.1 with PID 28184 (C:\Users\rihen\OneDrive\Bureau\PI 2024\E_contractor_Backend\target\classes started by rihen in C:\Users\rihen\OneDrive\Bureau\PI 2024\E_contractor_Backend)
+2024-07-12 22:01:45 - Running with Spring Boot v3.3.0, Spring v6.1.8
+2024-07-12 22:01:45 - No active profile set, falling back to 1 default profile: "default"
+2024-07-12 22:01:46 - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-07-12 22:01:46 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-12 22:01:46 - Finished Spring Data repository scanning in 107 ms. Found 24 JPA repository interfaces.
+2024-07-12 22:01:47 - Tomcat initialized with port 8080 (http)
+2024-07-12 22:01:47 - Starting service [Tomcat]
+2024-07-12 22:01:47 - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-07-12 22:01:47 - Initializing Spring embedded WebApplicationContext
+2024-07-12 22:01:47 - Root WebApplicationContext: initialization completed in 1841 ms
+2024-07-12 22:01:47 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-12 22:01:47 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-12 22:01:47 - HHH000026: Second-level cache disabled
+2024-07-12 22:01:48 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-12 22:01:48 - HikariPool-1 - Starting...
+2024-07-12 22:01:48 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4ef8090b
+2024-07-12 22:01:48 - HikariPool-1 - Start completed.
+2024-07-12 22:01:48 - HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2024-07-12 22:01:50 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-12 22:01:51 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-12 22:01:51 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-07-12 22:01:52 - Filter 'jwtRequestFilter' configured for use
+2024-07-12 22:01:52 - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-07-12 22:01:53 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-12 22:01:53 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@379445f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1f7e6c3a, org.springframework.security.web.context.SecurityContextHolderFilter@c34e260, org.springframework.security.web.header.HeaderWriterFilter@451cef5, org.springframework.web.filter.CorsFilter@55024328, org.springframework.security.web.authentication.logout.LogoutFilter@6b3decaa, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@4bd47b75, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@2f467bb9, group_6.e_contractor_backend.user.security.JwtRequestFilter@12a9889e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@243fe859, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@13421eb0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@40190f7f, org.springframework.security.web.session.SessionManagementFilter@7ad9ed91, org.springframework.security.web.access.ExceptionTranslationFilter@2c27d6e5, org.springframework.security.web.access.intercept.AuthorizationFilter@29260ef6]
+2024-07-12 22:01:54 - Tomcat started on port 8080 (http) with context path '/'
+2024-07-12 22:01:54 - Started EContractorBackendApplication in 8.826 seconds (process running for 9.593)
+2024-07-12 22:07:10 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-12 22:07:10 - Initializing Servlet 'dispatcherServlet'
+2024-07-12 22:07:10 - Completed initialization in 1 ms
+2024-07-12 22:07:10 - Securing OPTIONS /private/job-application/job-offers-kpis/
+2024-07-12 22:07:10 - Securing GET /private/job-application/job-offers-kpis/
+2024-07-12 22:07:10 - Secured GET /private/job-application/job-offers-kpis/
+2024-07-12 22:07:11 - Securing GET /error
+2024-07-12 22:07:11 - Set SecurityContextHolder to anonymous SecurityContext
+2024-07-12 22:07:11 - Redirecting to http://localhost:8080/oauth2/authorization/google
+2024-07-12 22:07:11 - Securing OPTIONS /oauth2/authorization/google
+2024-07-12 22:07:11 - Securing GET /oauth2/authorization/google
+2024-07-12 22:07:11 - Redirecting to https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=298057441663-6nngglicu565pg341qktslj8aqctdtot.apps.googleusercontent.com&scope=openid%20profile%20email&state=f2vx6T69YkZCguqPaur0uV3T-7dsNc_FgTOAoaP0cQ0%3D&redirect_uri=http://localhost:8080/login/oauth2/code/google&nonce=WR4ufJCxYEfDaYfOAWu1v031slDUgXi-RuuVPcv3jTc
+2024-07-12 22:07:30 - Securing GET /private/job-application/job-offers-kpis/
+2024-07-12 22:07:30 - Secured GET /private/job-application/job-offers-kpis/
+2024-07-12 22:07:30 - Securing GET /error
+2024-07-12 22:07:30 - Set SecurityContextHolder to anonymous SecurityContext
+2024-07-12 22:07:30 - Redirecting to http://localhost:8080/oauth2/authorization/google
+2024-07-12 22:07:30 - Securing GET /oauth2/authorization/google
+2024-07-12 22:07:30 - Redirecting to https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=298057441663-6nngglicu565pg341qktslj8aqctdtot.apps.googleusercontent.com&scope=openid%20profile%20email&state=G6kWK6JqYAx_EXXDZNZ60J7w-hqkVoWPLQZqCevL38Y%3D&redirect_uri=http://localhost:8080/login/oauth2/code/google&nonce=oRUgLgQelgj95keOBnphnWddF9HUGSbX4zdeqmKRK3I
+2024-07-12 22:08:45 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-12 22:08:45 - HikariPool-1 - Shutdown initiated...
+2024-07-12 22:08:45 - HikariPool-1 - Shutdown completed.
+2024-07-12 22:08:49 - Starting EContractorBackendApplication using Java 21.0.1 with PID 24008 (C:\Users\rihen\OneDrive\Bureau\PI 2024\E_contractor_Backend\target\classes started by rihen in C:\Users\rihen\OneDrive\Bureau\PI 2024\E_contractor_Backend)
+2024-07-12 22:08:49 - Running with Spring Boot v3.3.0, Spring v6.1.8
+2024-07-12 22:08:49 - No active profile set, falling back to 1 default profile: "default"
+2024-07-12 22:08:50 - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-07-12 22:08:50 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-12 22:08:50 - Finished Spring Data repository scanning in 102 ms. Found 24 JPA repository interfaces.
+2024-07-12 22:08:51 - Tomcat initialized with port 8080 (http)
+2024-07-12 22:08:51 - Starting service [Tomcat]
+2024-07-12 22:08:51 - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-07-12 22:08:51 - Initializing Spring embedded WebApplicationContext
+2024-07-12 22:08:51 - Root WebApplicationContext: initialization completed in 2118 ms
+2024-07-12 22:08:51 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-12 22:08:51 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-12 22:08:51 - HHH000026: Second-level cache disabled
+2024-07-12 22:08:52 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-12 22:08:52 - HikariPool-1 - Starting...
+2024-07-12 22:08:52 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@71d99732
+2024-07-12 22:08:52 - HikariPool-1 - Start completed.
+2024-07-12 22:08:52 - HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2024-07-12 22:08:53 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-12 22:08:54 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-12 22:08:54 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-07-12 22:08:55 - Filter 'jwtRequestFilter' configured for use
+2024-07-12 22:08:56 - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-07-12 22:08:56 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-12 22:08:56 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@379445f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1f7e6c3a, org.springframework.security.web.context.SecurityContextHolderFilter@c34e260, org.springframework.security.web.header.HeaderWriterFilter@5ec80aad, org.springframework.web.filter.CorsFilter@55024328, org.springframework.security.web.authentication.logout.LogoutFilter@6b3decaa, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@4bd47b75, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@2f467bb9, group_6.e_contractor_backend.user.security.JwtRequestFilter@775e3699, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@243fe859, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@13421eb0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@40190f7f, org.springframework.security.web.session.SessionManagementFilter@7ad9ed91, org.springframework.security.web.access.ExceptionTranslationFilter@4c9a3ae, org.springframework.security.web.access.intercept.AuthorizationFilter@29260ef6]
+2024-07-12 22:08:57 - Tomcat started on port 8080 (http) with context path '/'
+2024-07-12 22:08:57 - Started EContractorBackendApplication in 8.44 seconds (process running for 9.918)
+2024-07-12 22:09:27 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-12 22:09:27 - Initializing Servlet 'dispatcherServlet'
+2024-07-12 22:09:27 - Completed initialization in 2 ms
+2024-07-12 22:09:27 - Securing GET /private/job-application/job-offers-kpis/
+2024-07-12 22:09:27 - Secured GET /private/job-application/job-offers-kpis/
+2024-07-12 22:09:27 - Securing GET /error
+2024-07-12 22:09:27 - Set SecurityContextHolder to anonymous SecurityContext
+2024-07-12 22:09:27 - Redirecting to http://localhost:8080/oauth2/authorization/google
+2024-07-12 22:09:27 - Securing GET /oauth2/authorization/google
+2024-07-12 22:09:28 - Redirecting to https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=298057441663-6nngglicu565pg341qktslj8aqctdtot.apps.googleusercontent.com&scope=openid%20profile%20email&state=nJhxo9QrR_fkaJtllnc1aT1_qEpj1oPFRG4PFR__c1A%3D&redirect_uri=http://localhost:8080/login/oauth2/code/google&nonce=aZDrhS-4rpdDFJcZUI59WHDErVMkUQvGVpqnA-MY6cg
+2024-07-12 22:10:24 - Securing OPTIONS /private/job-application/job-offers-kpis
+2024-07-12 22:10:24 - Securing GET /private/job-application/job-offers-kpis
+2024-07-12 22:10:24 - Secured GET /private/job-application/job-offers-kpis
+2024-07-12 22:11:24 - Securing GET /private/job-application/job-offers-kpis
+2024-07-12 22:11:24 - Secured GET /private/job-application/job-offers-kpis
+2024-07-12 22:11:45 - Securing GET /private/job-application/job-offers-kpis
+2024-07-12 22:11:45 - Secured GET /private/job-application/job-offers-kpis
+2024-07-12 22:12:09 - Securing OPTIONS /private/job-offer/published
+2024-07-12 22:12:09 - Securing GET /private/job-offer/published
+2024-07-12 22:12:09 - Secured GET /private/job-offer/published
+2024-07-12 22:12:12 - Securing GET /private/job-application/job-offers-kpis
+2024-07-12 22:12:12 - Secured GET /private/job-application/job-offers-kpis
+2024-07-12 22:12:54 - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-12 22:12:54 - HikariPool-1 - Shutdown initiated...
+2024-07-12 22:12:54 - HikariPool-1 - Shutdown completed.
+2024-07-12 22:13:00 - Starting EContractorBackendApplication using Java 21.0.1 with PID 21928 (C:\Users\rihen\OneDrive\Bureau\PI 2024\E_contractor_Backend\target\classes started by rihen in C:\Users\rihen\OneDrive\Bureau\PI 2024\E_contractor_Backend)
+2024-07-12 22:13:00 - Running with Spring Boot v3.3.0, Spring v6.1.8
+2024-07-12 22:13:00 - No active profile set, falling back to 1 default profile: "default"
+2024-07-12 22:13:02 - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-07-12 22:13:02 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-12 22:13:02 - Finished Spring Data repository scanning in 98 ms. Found 24 JPA repository interfaces.
+2024-07-12 22:13:02 - Tomcat initialized with port 8080 (http)
+2024-07-12 22:13:02 - Starting service [Tomcat]
+2024-07-12 22:13:02 - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-07-12 22:13:02 - Initializing Spring embedded WebApplicationContext
+2024-07-12 22:13:02 - Root WebApplicationContext: initialization completed in 1806 ms
+2024-07-12 22:13:03 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-12 22:13:03 - HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-07-12 22:13:03 - HHH000026: Second-level cache disabled
+2024-07-12 22:13:03 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-07-12 22:13:03 - HikariPool-1 - Starting...
+2024-07-12 22:13:03 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@50785f86
+2024-07-12 22:13:03 - HikariPool-1 - Start completed.
+2024-07-12 22:13:03 - HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2024-07-12 22:13:05 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-07-12 22:13:06 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-12 22:13:06 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-07-12 22:13:07 - Filter 'jwtRequestFilter' configured for use
+2024-07-12 22:13:07 - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-07-12 22:13:07 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-12 22:13:08 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@645b31d0, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6cdd9a1b, org.springframework.security.web.context.SecurityContextHolderFilter@40bfd515, org.springframework.security.web.header.HeaderWriterFilter@4b10e470, org.springframework.web.filter.CorsFilter@7cb13e56, org.springframework.security.web.authentication.logout.LogoutFilter@5b54fe5b, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@14443c86, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@38171f9, group_6.e_contractor_backend.user.security.JwtRequestFilter@7fc2e0b7, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@61df99e6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@28f74096, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6222ee67, org.springframework.security.web.session.SessionManagementFilter@17dee9f9, org.springframework.security.web.access.ExceptionTranslationFilter@2453e3ce, org.springframework.security.web.access.intercept.AuthorizationFilter@1d0544b3]
+2024-07-12 22:13:08 - Tomcat started on port 8080 (http) with context path '/'
+2024-07-12 22:13:08 - Started EContractorBackendApplication in 8.172 seconds (process running for 9.104)
+2024-07-12 22:13:12 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-12 22:13:12 - Initializing Servlet 'dispatcherServlet'
+2024-07-12 22:13:12 - Completed initialization in 2 ms
+2024-07-12 22:13:12 - Securing GET /private/job-application/job-offers-kpis
+2024-07-12 22:13:12 - Secured GET /private/job-application/job-offers-kpis
+2024-07-12 22:14:03 - Securing GET /private/job-application/job-offers-kpis
+2024-07-12 22:14:03 - Secured GET /private/job-application/job-offers-kpis
+2024-07-12 22:14:37 - Securing GET /private/job-application/job-offers-kpis
+2024-07-12 22:14:37 - Secured GET /private/job-application/job-offers-kpis
