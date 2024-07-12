@@ -13,4 +13,5 @@ public interface JobOfferRepository extends JpaRepository<JobOffer, Long> {
     List<JobOffer> getJobOffersByType(JobOfferType type);
     List<JobOffer> getJobOffersByIsDeleted(Boolean isDeleted);
     JobOffer getJobOfferByReference(String reference);
+    List<JobOffer> getJobOffersByEmployerCompanyId(Long employerId);
 }
