@@ -10,6 +10,8 @@ import group_6.e_contractor_backend.job_offer_module.repositories.JobApplication
 import group_6.e_contractor_backend.job_offer_module.repositories.JobApplicationFileRepository;
 import group_6.e_contractor_backend.job_offer_module.repositories.JobApplicationRepository;
 import group_6.e_contractor_backend.job_offer_module.services.*;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cglib.core.Local;
@@ -17,6 +19,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,6 +39,8 @@ public class JobApplicationApiController {
     private final JobApplicationAppointmentRepository jobApplicationAppointmentRepository;
     private final JobApplicationFileRepository jobApplicationFileRepository;
     private final JobApplicationApointmentRepository jobApplicationApointmentRepository;
+    private final JavaMailSender mailSender;
+
 
     @PostMapping("appointment/create/{applicationId}")
     public JobApplicationApointment createApplicationAppointment(@RequestBody JobApplicationApointment jobApplicationApointment,@PathVariable Long applicationId){
@@ -49,8 +55,37 @@ public class JobApplicationApiController {
         JobApplicationApointment saved = jobApplicationApointmentRepository.save(jobApplicationApointment);
         application.setUpdateDate(LocalDateTime.now());
         jobApplicationRepository.save(application);
+
+        sendNewAppointmentBookedEmail(jobApplicationApointment);
         return saved;
     }
+    private void sendNewAppointmentBookedEmail(JobApplicationApointment appointment) {
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+            helper.setTo(appointment.getJobApplication().getEmail());
+            String subject = appointment.getJobApplication().getJobOffer().getJobTitle() + ": New Appointment Booked";
+            helper.setSubject(subject);
+
+            StringBuilder emailContent = new StringBuilder();
+            emailContent.append("<p>Dear " + appointment.getJobApplication().getStudentName() + ",</p>")
+                    .append(appointment.getJobApplication().getJobOffer().getEmployer().getCompanyName() + "<p> have booked new appointment with you.</p>")
+                    .append("<p>Title: " + appointment.getTitle() + "</p>")
+                    .append("<p>Type: " + appointment.getAppointmentType() + "</p>")
+                    .append("<p>Mode: " + appointment.getAppointmentLocation() + "</p>")
+                    .append("<p>Address/Meet link: " + appointment.getAppointmentAddress() + appointment.getMeetLink() + "</p>")
+                    .append("<p><a href=\"http://localhost:4200/discover-job-offers/application/"
+                            + appointment.getJobApplication().getReference() + "\" style=\"padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;\">View Application</a></p>");
+
+            helper.setText(emailContent.toString(), true);
+
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            throw new RuntimeException("Failed to send email", e);
+        }
+    }
+
     @PostMapping("create/{offerId}/{studentId}")
     public JobApplication createJobApplication(@RequestBody JobApplication jobApplication,@PathVariable Long offerId, @PathVariable Long studentId){
         return  jobApplicationService.createJobApplication(jobApplication,offerId,studentId);
