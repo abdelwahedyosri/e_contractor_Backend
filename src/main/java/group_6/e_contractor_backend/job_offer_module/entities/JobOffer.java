@@ -92,4 +92,5 @@ public class JobOffer {
     private Boolean isDeleted;
     private Long deletedBy;
     private LocalDateTime deleteDate;
+    private Boolean receiveApplicationsEmails;
 }

@@ -5,13 +5,19 @@ import group_6.e_contractor_backend.job_offer_module.enumerations.*;
 import group_6.e_contractor_backend.job_offer_module.repositories.*;
 import group_6.e_contractor_backend.user.entity.CandidateEntity;
 import group_6.e_contractor_backend.user.entity.CompanyEntity;
+import group_6.e_contractor_backend.user.entity.UserEntity;
 import group_6.e_contractor_backend.user.repository.ICandidateRepository;
 import group_6.e_contractor_backend.user.repository.ICompanyRepository;
 import jakarta.annotation.PostConstruct;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,6 +42,7 @@ public class JobApplicationServices implements JobApplicationService{
     private final JobOfferRepository jobOfferRepository ;
     private final ICandidateRepository candidateRepository ;
     private final JobApplicationRequirementRepository jobApplicationRequirementRepository;
+    private final JavaMailSender mailSender;
 
 
     @Value("${file.upload-dir}")
@@ -88,7 +95,38 @@ public class JobApplicationServices implements JobApplicationService{
             }
         }
 
+        if (Boolean.TRUE.equals(jobOffer.getReceiveApplicationsEmails())) {
+            sendNewApplicationEmail(jobApplication);
+        }
+
         return savedApplication;
+    }
+
+    private void sendNewApplicationEmail(JobApplication application) {
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+            helper.setTo(application.getJobOffer().getEmployer().getUser().getEmail());
+            String subject = application.getJobOffer().getJobTitle() + ": New Application Received";
+            helper.setSubject(subject);
+
+            StringBuilder emailContent = new StringBuilder();
+            emailContent.append("<p>Dear " + application.getJobOffer().getEmployer().getCompanyName() + ",</p>")
+                    .append("<p>You have received a new application from " + application.getStudentName() + ".</p>")
+                    .append("<p>Title: " + application.getStudentTitle() + "</p>")
+                    .append("<p>Phone: " + application.getPhoneNumber() + "</p>")
+                    .append("<p>Email: " + application.getEmail() + "</p>")
+                    .append("<p><a href=\"http://localhost:4200/job-offers/"
+                            + application.getJobOffer().getReference() + "/application/"
+                            + application.getReference() + "\" style=\"padding: 10px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;\">View Application</a></p>");
+
+            helper.setText(emailContent.toString(), true);
+
+            mailSender.send(message);
+        } catch (MessagingException e) {
+            throw new RuntimeException("Failed to send email", e);
+        }
     }
 
     @Override
