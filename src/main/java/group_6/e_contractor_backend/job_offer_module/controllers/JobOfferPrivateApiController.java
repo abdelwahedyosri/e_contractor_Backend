@@ -50,7 +50,7 @@ public class JobOfferPrivateApiController {
     @GetMapping("published")
     public Map<String, Object> listPublished() {
         Map<String, Object> response = new HashMap<>();
-        List<JobOffer> list = jobOfferService.listJobOffersByStatus(JobOfferStatus.Published);
+        List<JobOffer> list = jobOfferRepository.findAllByStatusNotOrderByUpdateDateDesc(JobOfferStatus.Draft);
         List<JobApplication> applications = jobApplicationRepository.findAll();
         response.put("published", list);
         response.put("applications", applications);

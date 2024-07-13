@@ -18,4 +18,5 @@ public interface JobOfferRepository extends JpaRepository<JobOffer, Long> {
     List<JobOffer> findAllByDeadlineBeforeAndStatusNot(LocalDateTime deadline,JobOfferStatus status);
 
     List<JobOffer> findAllByDeadlineBeforeAndStatus(LocalDateTime deadline,JobOfferStatus status);
+    List<JobOffer> findAllByStatusNotOrderByUpdateDateDesc(JobOfferStatus status);
 }

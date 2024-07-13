@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,6 +77,18 @@ public class JobOfferApiController {
         return response;
     }
 
+    @GetMapping("expired/{employerId}")
+    public Map<String, Object> listEmployerExpired(@PathVariable Long employerId) {
+        Map<String, Object> response = new HashMap<>();
+        List<JobOffer> list = jobOfferRepository.findByEmployerCompanyIdAndStatusOrderByUpdateDateDesc(employerId,JobOfferStatus.Expired);
+        List<JobApplication> applications = jobApplicationRepository.getJobApplicationsByJobOfferEmployerCompanyIdOrderByUpdateDate(employerId);
+        response.put("expired", list);
+        response.put("applications", applications);
+        return response;
+    }
+
+
+
     @GetMapping("applications/{offerId}")
     public Map<String, Object> listApplications(@PathVariable Long offerId) {
         Map<String, Object> response = new HashMap<>();
@@ -116,6 +130,21 @@ public class JobOfferApiController {
             student.getJobInterests().add(interest);
             JobOfferInterest savedInterest = jobOfferInterestRepository.save(interest);
             return savedInterest;
+        } else {
+            return null;
+        }
+    }
+
+    @PostMapping("extend-deadline/{offerId}")
+    public JobOffer extendDeadline(@RequestBody JobOffer jobOffer, @PathVariable Long offerId) {
+        JobOffer fetchedJobOffer = jobOfferRepository.findById(offerId).orElse(null);
+
+        if (fetchedJobOffer != null) {
+            jobOffer.setUpdateDate(LocalDateTime.now());
+            jobOffer.setStatus(JobOfferStatus.Published);
+
+            JobOffer updatedJobOffer = jobOfferRepository.save(jobOffer);
+            return updatedJobOffer;
         } else {
             return null;
         }
