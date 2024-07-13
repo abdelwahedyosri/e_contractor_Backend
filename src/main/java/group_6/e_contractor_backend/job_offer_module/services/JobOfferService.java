@@ -17,8 +17,7 @@ public interface JobOfferService {
     List<JobOffer> listJobOffersByStatusByEmployerId(JobOfferStatus status,Long employerId);
     List<JobOffer> listJobOffersByType(JobOfferType type);
     List<JobOffer> listJobOffersNotDeleted(Boolean isDeleted);
-    JobOffer publishJobOffer(Long offerId);
-    JobOffer archiveJobOffer(Long offerId);
+
     JobOffer deleteJobOffer(Long offerId);
     JobOfferRequirement createJobOfferRequirement(JobOfferRequirement jobOfferRequirement, Long offerId);
 

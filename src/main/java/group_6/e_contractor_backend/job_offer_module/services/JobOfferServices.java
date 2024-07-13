@@ -5,7 +5,9 @@ import group_6.e_contractor_backend.job_offer_module.repositories.*;
 import group_6.e_contractor_backend.user.entity.CompanyEntity;
 import group_6.e_contractor_backend.user.repository.ICompanyRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -180,17 +182,19 @@ public class JobOfferServices implements JobOfferService {
     }
 
     @Override
-    public JobOffer publishJobOffer(Long offerId) {
-        return null;
-    }
-
-    @Override
-    public JobOffer archiveJobOffer(Long offerId) {
-        return null;
-    }
-
-    @Override
     public JobOffer deleteJobOffer(Long offerId) {
         return null;
+    }
+
+    @Transactional
+    @Scheduled(cron = "0 0 1 * * ?")
+    public void checkAndExpireJobOffers() {
+        LocalDateTime now = LocalDateTime.now();
+        List<JobOffer> expiredOffers = jobOfferRepository.findAllByDeadlineBeforeAndStatus(now, JobOfferStatus.Published);
+        expiredOffers.forEach(offer -> {
+            offer.setStatus(JobOfferStatus.Expired);
+            offer.setUpdateDate(now);
+            jobOfferRepository.save(offer);
+        });
     }
 }

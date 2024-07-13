@@ -209,7 +209,7 @@ public class JobApplicationPrivateApiController {
                 .sum();
 
         long totalAppointments = jobOffer.getJobApplications().stream()
-                .flatMap(application -> application.getJobApplicationAppointments().stream())
+                .flatMap(application -> application.getJobApplicationApointments().stream())
                 .count();
 
 
@@ -334,13 +334,11 @@ public class JobApplicationPrivateApiController {
                 .peek(offer -> System.out.println("Job Offer: " + offer)) // Log job offer
                 .flatMap(offer -> offer.getJobApplications().stream())
                 .peek(application -> System.out.println("Job Application: " + application)) // Log job application
-                .flatMap(application -> application.getJobApplicationAppointments().stream())
+                .flatMap(application -> application.getJobApplicationApointments().stream())
                 .peek(appointment -> System.out.println("Appointment: " + appointment)) // Log appointment
                 .count();
 
         System.out.println("Total Appointments: " + totalAppointments);
-
-
 
 
         // Calculate total job interests

@@ -55,7 +55,9 @@ public class SecurityConfig {
                                 "/users/test",
                                 "/api/candidates/register",
                                 "/api/candidates",
-                                "/images/**"
+                                "/images/**",
+                                "/private/job-application/display-file/**",
+                                "/job-application/display-file/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
